@@ -1,14 +1,20 @@
-addpath("./Functions/Plot/");
-addpath("./Functions/Plot/GridScan/");
-addpath("./Functions/Plot/APPLICATION/");
-addpath("./Functions/Plot/SPECTRUM/");
+global baseDir;
+baseDir = pwd;
+addpath(fullfile(baseDir, "Functions", "Plot"));
+addpath(fullfile(baseDir, "Functions", "Plot", "GridScan"));
+addpath(fullfile(baseDir, "Functions", "Plot", "APPLICATION"));
+addpath(fullfile(baseDir, "Functions", "Plot", "SPECTRUM"));
+if ~exist(fullfile(baseDir, "Pics"), 'dir')
+    mkdir(fullfile(baseDir, "Pics"));
+end
+
 % ~~~~~~~~~~~~~~~~~~~~ Plot One Experiment ~~~~~~~~~~~~~~~~~~~~ %
 % files = {"./Output/LITE/Hawaii_4000_Crust1_Huang_Enomoto_2025-04-26_19-23-37.mat";...
     % "./Output/LITE/SNO+_4000_Crust1_Huang_Enomoto_4.5_2025-04-16_09-44-43.mat";...
 %     "./Output/LITE/SNO+_4000_Crust1_Huang_Yufeng_3.5_2025-04-16_09-54-13.mat";...
 %     "./Output/LITE/SNO+_4000_Crust1_Huang_Yufeng_4.5_2025-04-16_09-49-03.mat";...
     % };
-files = {"./Output/LITE/SNO+_4000_Crust1_Huang_Enomoto_2025-05-26_18-18-08.mat"};
+files = {"./Output/LITE/SNO+_5_Crust1_Huang_Enomoto_2025-07-07_18-37-02.mat"};
 for ii1 = 1 : length(files)
     file = files{ii1};
     Plot_One_Experiment_Signal_Rate(file);

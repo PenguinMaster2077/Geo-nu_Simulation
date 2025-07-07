@@ -6,12 +6,17 @@
 % Institution     : Shandong University, CN
 % Classification  : Original
 %
+% Modified by     : Zhihao Xu
+% Institution     : Tohoku University, JP
+% Classification  : Modified
+%
 % Created On      : 2024-11-08
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % ~~~~~~~~~~~~~~~~~~~~ Run Info ~~~~~~~~~~~~~~~~~~~~ %
 Geology.Iteration = 'Input';
 Geology.Random_Seed = 'Input';
+global baseDir;
 
 % ~~~~~~~~~~~~~~~~~~~~ Lithosphere ~~~~~~~~~~~~~~~~~~~~ %
 % % Lithosphere.Model % %
@@ -77,7 +82,7 @@ Geology.Lithosphere.Model.DeepCrust.Bivart = 'Compute_Abundance_DeepCrust()';
 % ~~~~~~~~~~~~~~~~~~~~ Mantle ~~~~~~~~~~~~~~~~~~~~ %
 Geology.Mantle.Method = 'Input';
 Geology.Mantle.Proption_EM = 'Input';
-Geology.Mantle = load("Input_Files\PREM.mat");
+Geology.Mantle = load(fullfile(baseDir, "Input_Files", "PREM.mat"));
 Geology.Mantle.Correlation = 'Generate_Correlations()';
 % % Mantle.Abundance % %
 abundance_fields = {'U', 'Th', 'K'};

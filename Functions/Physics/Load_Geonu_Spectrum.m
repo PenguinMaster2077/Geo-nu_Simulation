@@ -8,6 +8,10 @@ function Physics = Load_Geonu_Spectrum(Physics)
 % Institution     : Shandong University, CN
 % Classification  : Modified
 %
+% Modified by     : Zhihao Xu
+% Institution     : Tohoku University, JP
+% Classification  : Modified
+%
 % Input Parameters:
 %   - Physics     : Physics data structure
 %
@@ -23,11 +27,12 @@ function Physics = Load_Geonu_Spectrum(Physics)
 
 % ~~~~~~~~~~~~~~~~~~~~ Load Geonu Spectrum ~~~~~~~~~~~~~~~~~~~~ %
 method = Physics.Elements.Spectrum.Method;
+global baseDir;
 if strcmp(method, 'Enomoto')
-    Spectrum = load("Input_Files\Enomoto2007_AntineutrinoSpectrum.mat");
+    Spectrum = load(fullfile(baseDir, "Input_Files", "Enomoto2007_AntineutrinoSpectrum.mat"));
     name = 'enomoto';
 elseif strcmp(method, 'Yufeng')
-    Spectrum = load("Input_Files\Yufeng2024_AntineutrinoSpectrum.mat");
+    Spectrum = load(fullfile(baseDir, "Input_Files", "Yufeng2024_AntineutrinoSpectrum.mat"));
     name = 'Yufeng';
 end
 
