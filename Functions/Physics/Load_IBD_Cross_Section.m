@@ -7,6 +7,10 @@ function Physics = Load_IBD_Cross_Section(Physics)
 % Institution     : Shandong University, CN
 % Classification  : Original
 %
+% Modified by     : Zhihao Xu
+% Institution     : Tohoku University, JP
+% Classification  : Modified
+%
 % Input Parameters:
 %   - Physics     : Physics data structure
 %
@@ -21,7 +25,8 @@ function Physics = Load_IBD_Cross_Section(Physics)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % % ~~~~~~~~~~~~~~~~~~~~ Load Data ~~~~~~~~~~~~~~~~~~~~ % %
 model = Physics.Cross_Section.Model;
-IBD_Cross_Section = load("Input_Files\IBD_Cross_Section.mat");
+global baseDir;
+IBD_Cross_Section = load(fullfile(baseDir, "Input_Files", "IBD_Cross_Section.mat"));
 energies = Physics.Elements.Spectrum.Energy.Bin_Centers;
 ibd_energies = IBD_Cross_Section.IBD_Cross_Section(:, 1);
 if strcmp(model, 'Approximation')
