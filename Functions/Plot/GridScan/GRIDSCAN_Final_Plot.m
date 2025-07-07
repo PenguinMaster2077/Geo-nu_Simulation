@@ -41,6 +41,7 @@ function GRIDSCAN_Final_Plot(data_dir, best_file_path, out_pic_path)
     x = res(:, 1);
     y = res(:, 2);
     z = res(:, 5);
+    z = 100 .* z;
     [Xq, Yq] = meshgrid(unique(x), unique(y));
     Zq = griddata(x, y, z, Xq, Yq, 'cubic');
     
@@ -59,7 +60,7 @@ function GRIDSCAN_Final_Plot(data_dir, best_file_path, out_pic_path)
     
 % % ~~~~~~~~~~~~~~~~~~~~ Contour ~~~~~~~~~~~~~~~~~~~~ % %
     for ii1 = 0 : 20
-        z_level = 0.001 * ii1;
+        z_level = 0.1 * ii1;  % 👈 因为Zq现在是百分比，步长变为0.1%
         if z_level == 0
             [C, h] = contour(Xq, Yq, Zq, [z_level z_level], '--r', 'LineWidth', 1.5);
         else

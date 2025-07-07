@@ -21,7 +21,11 @@ This repository is a revised and extended version based on the original GEONU co
 
 ## Authorship and Attribution
 
-This project was developed by [Shuai Ouyang], building upon previous work from an early version of [GEONU](https://github.com/LSKgeo/GEONU).  
+This project is maintained by **Shuai Ouyang**, who led the architectural redesign, modular restructuring, and major algorithmic implementations. It builds upon the original [GEONU](https://github.com/LSKgeo/GEONU) framework.
+
+Co-authors:
+- **Zhihao Xu**  – Contributed [PR #3]
+
 All original contributions are clearly marked in code headers. Modified and adapted files are appropriately annotated.  
 External figures or methods are cited in the documentation as needed.
 
