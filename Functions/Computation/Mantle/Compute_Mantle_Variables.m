@@ -4,7 +4,7 @@
 %
 % Original Author : main code by old GEONU
 % Modified by     : Shuai Ouyang
-% Institution     : Shandong University, CN5
+% Institution     : Shandong University, CN
 % Classification  : Modified
 %
 %
