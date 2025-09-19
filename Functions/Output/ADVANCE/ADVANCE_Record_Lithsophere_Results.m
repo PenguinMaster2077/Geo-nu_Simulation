@@ -14,7 +14,7 @@
 %
 % Created On      : 2025-04-03
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+fprintf('Start to recording: %s\n', name_layer);
 % ~~~~~~~~~~~~~~~~~~~~ Each Layer ~~~~~~~~~~~~~~~~~~~~ %
 Output.Lithosphere.Mass.(name_layer).U = sum(mass_u, 1)';
 Output.Lithosphere.Mass.(name_layer).Th = sum(mass_th, 1)';

@@ -10,6 +10,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % ~~~~~~~~~~~~~~~~~~~~ Compute Temp Variables for Lithsophere ~~~~~~~~~~~~~~~~~~~~ %
+fprintf('Start to processing: %s\n', name_layer);
 template = zeros(len, iteration);
 if strcmp(name_layer, 's1')
     PRESSURE = template;

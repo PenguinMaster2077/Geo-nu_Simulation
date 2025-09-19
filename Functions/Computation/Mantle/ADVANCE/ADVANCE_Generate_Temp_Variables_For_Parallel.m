@@ -8,7 +8,7 @@
 %
 % Created On      : 2025-04-03
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+fprintf('Start to processing: Mantle\n');
 % ~~~~~~~~~~~~~~~~~~~~ Temp Variables ~~~~~~~~~~~~~~~~~~~~ %
 GeoPhys = Geology.Lithosphere.Model.GeoPhys;
 LAB = GeoPhys.LAB;
