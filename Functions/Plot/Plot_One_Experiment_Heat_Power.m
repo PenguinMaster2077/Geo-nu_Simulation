@@ -1,4 +1,4 @@
-function Plot_One_Experiment_Heat_Power(file_path)
+function Plot_One_Experiment_Heat_Power(file_path, pic_dir)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % File Name       : Plot_One_Experiment_Heat_Power.m
 % Description     : Get statistical results
@@ -42,7 +42,7 @@ y_lim = ylim;
 x_pos = 30;
 y_pos = y_lim(2) * 0.8;
 text(x_pos, y_pos, parameter_tex, 'FontSize', 12, 'BackgroundColor', 'white', 'EdgeColor', 'black');
-pic_path = sprintf('./Pics/Heat_Power_Lithosphere_%s.jpg', name);
+pic_path = fullfile(pic_dir, sprintf('Heat_Power_Lithosphere_%s.jpg', name));
 print(pic_path, '-djpeg', '-r500');
 
 % % ~~~~~~~~~~~~~~~~~~~~ Mantle ~~~~~~~~~~~~~~~~~~~~ % %
@@ -62,7 +62,7 @@ y_lim = ylim;
 x_pos = 30;
 y_pos = y_lim(2) * 0.8;
 text(x_pos, y_pos, parameter_tex, 'FontSize', 12, 'BackgroundColor', 'white', 'EdgeColor', 'black');
-pic_path = sprintf('./Pics/Heat_Power_Mantle_%s.jpg', name);
+pic_path = fullfile(pic_dir, sprintf('Heat_Power_Mantle_%s.jpg', name));
 print(pic_path, '-djpeg', '-r500');
 
 % % ~~~~~~~~~~~~~~~~~~~~ Total ~~~~~~~~~~~~~~~~~~~~ % %
@@ -82,7 +82,7 @@ y_lim = ylim;
 x_pos = 30;
 y_pos = y_lim(2) * 0.8;
 text(x_pos, y_pos, parameter_tex, 'FontSize', 12, 'BackgroundColor', 'white', 'EdgeColor', 'black');
-pic_path = sprintf('./Pics/Heat_Power_Total_%s.jpg', name);
+pic_path = fullfile(pic_dir, sprintf('Heat_Power_Total_%s.jpg', name));
 print(pic_path, '-djpeg', '-r500');
 
 % % ~~~~~~~~~~~~~~~~~~~~ U ~~~~~~~~~~~~~~~~~~~~ % %
@@ -104,7 +104,7 @@ y_lim = ylim;
 x_pos = 30;
 y_pos = y_lim(2) * 0.8;
 text(x_pos, y_pos, parameter_tex, 'FontSize', 12, 'BackgroundColor', 'white', 'EdgeColor', 'black');
-pic_path = sprintf('./Pics/Heat_Power_238U_%s.jpg', name);
+pic_path = fullfile(pic_dir, sprintf('Heat_Power_238U_%s.jpg', name));
 print(pic_path, '-djpeg', '-r500');
 % % ~~~~~~~~~~~~~~~~~~~~ TH232 ~~~~~~~~~~~~~~~~~~~~ % %
 th = Res.Output.Lithosphere.Heat_Power.Total.Th + Res.Output.Mantle.Heat_Power.Total.Th;
@@ -125,7 +125,7 @@ y_lim = ylim;
 x_pos = 30;
 y_pos = y_lim(2) * 0.8;
 text(x_pos, y_pos, parameter_tex, 'FontSize', 12, 'BackgroundColor', 'white', 'EdgeColor', 'black');
-pic_path = sprintf('./Pics/Heat_Power_232Th_%s.jpg', name);
+pic_path = fullfile(pic_dir, sprintf('Heat_Power_232Th_%s.jpg', name));
 print(pic_path, '-djpeg', '-r500');
 
 end

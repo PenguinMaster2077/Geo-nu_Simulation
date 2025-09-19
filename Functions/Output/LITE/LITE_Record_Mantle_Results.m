@@ -12,7 +12,7 @@
 %
 % Created On      : 2025-03-20
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+fprintf('Start to record: Mantle\n');
 % ~~~~~~~~~~~~~~~~~~~~ Record ~~~~~~~~~~~~~~~~~~~~ %
 Output.Mantle.Geonu_Signal.Depleted.U238 = sum(SIGNAL_U_DM, 1)';
 Output.Mantle.Geonu_Signal.Depleted.Th232 = sum(SIGNAL_TH_DM, 1)';

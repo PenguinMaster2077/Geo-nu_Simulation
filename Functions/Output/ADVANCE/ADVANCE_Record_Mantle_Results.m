@@ -14,7 +14,7 @@
 %
 % Created On      : 2025-04-03
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-fprintf('Start to recording: Mantle\n');
+fprintf('Start to record: Mantle\n');
 % ~~~~~~~~~~~~~~~~~~~~ Record ~~~~~~~~~~~~~~~~~~~~ %
 % % ~~~~~~~~~~~~~~~~~~~~ Signal ~~~~~~~~~~~~~~~~~~~~ % %
 Output.Mantle.Geonu_Signal.Depleted.U238 = sum(signal_u_dm, 1)';

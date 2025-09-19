@@ -14,11 +14,11 @@ end
 %     "./Output/LITE/SNO+_4000_Crust1_Huang_Yufeng_3.5_2025-04-16_09-54-13.mat";...
 %     "./Output/LITE/SNO+_4000_Crust1_Huang_Yufeng_4.5_2025-04-16_09-49-03.mat";...
     % };
-files = {"./Output/LITE/SNO+_5_Crust1_Huang_Enomoto_2025-07-07_18-37-02.mat"};
-for ii1 = 1 : length(files)
-    file = files{ii1};
-    Plot_One_Experiment_Signal_Rate(file);
-end
+% files = {"./Output/LITE/SNO+_5_Crust1_Huang_Enomoto_2025-07-07_18-37-02.mat"};
+% for ii1 = 1 : length(files)
+%     file = files{ii1};
+%     Plot_One_Experiment_Signal_Rate(file);
+% end
 % clear files ii1 file;
 
 % ~~~~~~~~~~~~~~~~~~~~ Plot All Experiments ~~~~~~~~~~~~~~~~~~~~ %
@@ -37,9 +37,9 @@ end
 % GRIDSCAN_Final_Plot(data_dir, best_file_path, out_pic_path);
 
 % ~~~~~~~~~~~~~~~~~~~~ Heat Power ~~~~~~~~~~~~~~~~~~~~ %
-% file_path = "./Output/ADVANCE/SNO+_4000_Crust1_Huang_2025-04-10_17-12-46.mat";
-% Plot_One_Experiment_Heat_Power(file_path);
-% Plot_One_Experiment_Signal(file_path);
+file_path = "./Output/ADVANCE/SNO+_4000_Crust1_Huang_Enomoto_2025-09-19_11-56-18.mat";
+Plot_One_Experiment_Heat_Power(file_path);
+Plot_One_Experiment_Signal(file_path);
 
 % ~~~~~~~~~~~~~~~~~~~~ Signal Rate vs Distance ~~~~~~~~~~~~~~~~~~~~ %
 % file_path = "./Output/APPLICATION/Fluxes_Distance_SNO+_100_Crust1_Huang_2025-04-14_11-27-41.mat";

@@ -13,7 +13,7 @@
 %
 % Created On      : 2025-03-26
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+fprintf('Start to record: Mantle\n');
 % ~~~~~~~~~~~~~~~~~~~~ Record ~~~~~~~~~~~~~~~~~~~~ %
 Output.Mantle.Geonu_Spectrum.Depleted.U238 = spectrum_u_dm;
 Output.Mantle.Geonu_Spectrum.Depleted.Th232 = spectrum_th_dm;

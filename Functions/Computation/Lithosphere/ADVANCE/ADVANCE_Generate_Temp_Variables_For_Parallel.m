@@ -8,7 +8,7 @@
 %
 % Created On      : 2025-04-03
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-fprintf('Start to processing: Lithosphere\n');
+fprintf('Start to process: Lithosphere\n');
 % ~~~~~~~~~~~~~~~~~~~~ Temp Variabls ~~~~~~~~~~~~~~~~~~~~ %
 len = length(Geology.Lithosphere.Model.GeoPhys.lonlat);
 iteration = Geology.Iteration;

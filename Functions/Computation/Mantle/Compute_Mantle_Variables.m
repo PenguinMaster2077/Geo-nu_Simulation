@@ -14,7 +14,7 @@
 %
 % Created On      : 2025-03-20
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+fprintf('Start to process: Mantle\n');
 % ~~~~~~~~~~~~~~~~~~~~ Mass ~~~~~~~~~~~~~~~~~~~~ %
 earth_mass = Generate_Random_Normal(5.97218e24, 6e19, iteration);
 x = 1.835e24 + 9.675e22; % Unit: kg; Mass of inner and outer core %

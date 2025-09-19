@@ -8,6 +8,7 @@
 %
 % Created On      : 2025-03-28
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+fprintf('Complete: Mantle\n');
 
 clear LAB lonlat surface_radius PREM;
 clear detector Sig_Res_U238 Sig_Res_Th232;

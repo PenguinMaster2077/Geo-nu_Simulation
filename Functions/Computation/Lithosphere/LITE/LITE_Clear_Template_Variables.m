@@ -8,6 +8,7 @@
 %
 % Created On      : 2025-03-18
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+fprintf('Complete: Lithosphere\n');
 
 clear GeoPhys;
 clear Geo_Res_U238 Geo_Res_Th232 energy;
