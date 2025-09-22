@@ -17,8 +17,11 @@ if strcmp('GLOBAL', version) == 1
 % ---------- Local Computation ---------- %
 elseif strcmp('LOCAL', version) == 1
     pic_dir = fullfile(baseDir, "Pics");
+    fprintf('Loading Crust Info: %s\n', crust_file_path);
     load(crust_file_path);
+    fprintf('Loading GP Info: %s\n', file_path);
     load(file_path);
+    fprintf('Performing MC Sampling\n');
     run(fullfile(baseDir, "Scripts", "Plot_Perform_MC_Sampling.m"));
 end
 

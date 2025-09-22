@@ -166,6 +166,7 @@ t = annotation('textbox', [0, 0.95, 1, 0.05], 'String', ...
 [~, name, ~] = fileparts(file_path);
 pic_path = fullfile(pic_dir, sprintf('Geonu_Signals_238U_Local_%s.jpg', name));
 print(pic_path, '-djpeg', '-r500');
+fprintf('Figure saved to: %s\n', pic_path);
 
 % ~~~~~ Th232 ~~~~~ %
 figure('Visible', 'off', 'Units','pixels', 'Position', [100, 100, 1600, 1000]);  % Length and Height in ppx %);
@@ -216,7 +217,7 @@ for i = 1:len
     elseif i == 4
         xpos = -1.1;
     elseif i == 5
-        xpos = -2.8;
+        xpos = -3.8;
     elseif i == 7
         xpos = -3.7;
     else
@@ -244,6 +245,7 @@ t = annotation('textbox', [0, 0.95, 1, 0.05], 'String', ...
 [~, name, ~] = fileparts(file_path);
 pic_path = fullfile(pic_dir, sprintf('Geonu_Signals_232Th_Local_%s.jpg', name));
 print(pic_path, '-djpeg', '-r500');
+fprintf('Figure saved to: %s\n', pic_path);
 
 % ---------- Clear Variables ---------- %
 
