@@ -1,4 +1,4 @@
-function Plot_One_Experiment_Heat_Power(file_path, pic_dir)
+function Plot_One_Experiment_Heat_Power(file_path, pic_dir, Plot)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % File Name       : Plot_One_Experiment_Heat_Power.m
 % Description     : Get statistical results
@@ -42,8 +42,10 @@ y_lim = ylim;
 x_pos = 30;
 y_pos = y_lim(2) * 0.8;
 text(x_pos, y_pos, parameter_tex, 'FontSize', 12, 'BackgroundColor', 'white', 'EdgeColor', 'black');
-pic_path = fullfile(pic_dir, sprintf('Heat_Power_Lithosphere_%s.jpg', name));
-print(pic_path, '-djpeg', '-r500');
+if Plot.Save
+    pic_path = fullfile(pic_dir, sprintf('Heat_Power_Lithosphere_%s.jpg', name));
+    print(pic_path, '-djpeg', '-r500');
+end
 
 % % ~~~~~~~~~~~~~~~~~~~~ Mantle ~~~~~~~~~~~~~~~~~~~~ % %
 pd = fitdist(heat_mantle(:, 1), 'Normal');
@@ -62,8 +64,10 @@ y_lim = ylim;
 x_pos = 30;
 y_pos = y_lim(2) * 0.8;
 text(x_pos, y_pos, parameter_tex, 'FontSize', 12, 'BackgroundColor', 'white', 'EdgeColor', 'black');
-pic_path = fullfile(pic_dir, sprintf('Heat_Power_Mantle_%s.jpg', name));
-print(pic_path, '-djpeg', '-r500');
+if Plot.Save
+    pic_path = fullfile(pic_dir, sprintf('Heat_Power_Mantle_%s.jpg', name));
+    print(pic_path, '-djpeg', '-r500');
+end
 
 % % ~~~~~~~~~~~~~~~~~~~~ Total ~~~~~~~~~~~~~~~~~~~~ % %
 pd = fitdist(heat_total(:, 1), 'Normal');
@@ -82,8 +86,10 @@ y_lim = ylim;
 x_pos = 30;
 y_pos = y_lim(2) * 0.8;
 text(x_pos, y_pos, parameter_tex, 'FontSize', 12, 'BackgroundColor', 'white', 'EdgeColor', 'black');
-pic_path = fullfile(pic_dir, sprintf('Heat_Power_Total_%s.jpg', name));
-print(pic_path, '-djpeg', '-r500');
+if Plot.Save
+    pic_path = fullfile(pic_dir, sprintf('Heat_Power_Total_%s.jpg', name));
+    print(pic_path, '-djpeg', '-r500');
+end
 
 % % ~~~~~~~~~~~~~~~~~~~~ U ~~~~~~~~~~~~~~~~~~~~ % %
 u = Res.Output.Lithosphere.Heat_Power.Total.U + Res.Output.Mantle.Heat_Power.Total.U;
@@ -104,8 +110,11 @@ y_lim = ylim;
 x_pos = 30;
 y_pos = y_lim(2) * 0.8;
 text(x_pos, y_pos, parameter_tex, 'FontSize', 12, 'BackgroundColor', 'white', 'EdgeColor', 'black');
-pic_path = fullfile(pic_dir, sprintf('Heat_Power_238U_%s.jpg', name));
-print(pic_path, '-djpeg', '-r500');
+if Plot.Save
+    pic_path = fullfile(pic_dir, sprintf('Heat_Power_238U_%s.jpg', name));
+    print(pic_path, '-djpeg', '-r500');
+end
+
 % % ~~~~~~~~~~~~~~~~~~~~ TH232 ~~~~~~~~~~~~~~~~~~~~ % %
 th = Res.Output.Lithosphere.Heat_Power.Total.Th + Res.Output.Mantle.Heat_Power.Total.Th;
 th = th .* 1e-12; % Unit: TW %
@@ -125,7 +134,9 @@ y_lim = ylim;
 x_pos = 30;
 y_pos = y_lim(2) * 0.8;
 text(x_pos, y_pos, parameter_tex, 'FontSize', 12, 'BackgroundColor', 'white', 'EdgeColor', 'black');
-pic_path = fullfile(pic_dir, sprintf('Heat_Power_232Th_%s.jpg', name));
-print(pic_path, '-djpeg', '-r500');
+if Plot.Save
+    pic_path = fullfile(pic_dir, sprintf('Heat_Power_232Th_%s.jpg', name));
+    print(pic_path, '-djpeg', '-r500');
+end
 
 end

@@ -1,4 +1,4 @@
-function [TOTAL_MASS, MASS_U, MASS_TH,  SIGNAL_U, SIGNAL_TH, PRESSURE_TO_LAYER]...
+function [MASS_ROCK, MASS_U, MASS_TH,  SIGNAL_U, SIGNAL_TH, PRESSURE_TO_LAYER]...
     = LITE_Compute_Lithosphere_Cell(index, iteration, name_model, name_layer,...
     last_layer_pressure, detector, cor_array, array_for_radius, array_for_mass, array_for_abundance,...
     array_for_signal)
@@ -26,7 +26,7 @@ function [TOTAL_MASS, MASS_U, MASS_TH,  SIGNAL_U, SIGNAL_TH, PRESSURE_TO_LAYER].
 %   - array_for_flux        : Variables used for flux calculation
 %
 % Output Parameters:
-%   - TOTAL_MASS (kg)                : Total rock mass
+%   - MASS_ROCK  (kg)                : Total rock mass
 %   - MASS_U     (kg)                : Total uranium mass
 %   - MASS_TH    (kg)                : Total thorium mass
 %   - SIGNAL_U   (TNU)               : Signal rate from uranium
@@ -49,7 +49,7 @@ function [TOTAL_MASS, MASS_U, MASS_TH,  SIGNAL_U, SIGNAL_TH, PRESSURE_TO_LAYER].
 thickness_mean = array_for_radius(1); % Unit: m; single value %
 if thickness_mean <= 0 | strcmp('LM_OC', name_layer) == 1
     template = zeros(1, iteration);
-    TOTAL_MASS = template;
+    MASS_ROCK = template;
     MASS_U = template;
     MASS_TH = template;
     SIGNAL_U = template;
@@ -132,7 +132,7 @@ clear lon_left lon_right lat_bottom lat_top radius_min radius_max;
 clear RADIUS;
 
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Mass ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
-TOTAL_MASS = DENSITY .* VOLUME; % Row Vector %
+MASS_ROCK = DENSITY .* VOLUME; % Row Vector %
 % % Clear Variables % %
 clear VOLUME;
 
@@ -266,8 +266,8 @@ ABUNDANCE_U(ABUNDANCE_U < 0) = 0;
 ABUNDANCE_TH(ABUNDANCE_TH < 0) = 0;
 ABUNDANCE_K(ABUNDANCE_K < 0) = 0;
 
-MASS_U = TOTAL_MASS .* ABUNDANCE_U;
-MASS_TH = TOTAL_MASS .* ABUNDANCE_TH;
+MASS_U = MASS_ROCK .* ABUNDANCE_U;
+MASS_TH = MASS_ROCK .* ABUNDANCE_TH;
 
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Geonu Signals ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
 lon_center = array_for_mass(2);

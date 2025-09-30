@@ -93,10 +93,10 @@ for ii1 = 1 : length(abundance_fields)
 end
 
 % % Mantle.Mass % %
-Geology.Mantle.Mass.Total.Total = 'Compute_Mantle_Mass()';
+Geology.Mantle.Mass.Total.Rock = 'Compute_Mantle_Mass()';
 Geology.Mantle.Mass.Total.U = 'Compute_Mantle_Mass()';
 Geology.Mantle.Mass.Total.Th = 'Compute_Mantle_Mass()';
-mass_fields = {'Total', 'U238', 'U235', 'U', 'Th232', 'K40'};
+mass_fields = {'Rock', 'U238', 'U235', 'U', 'Th232', 'K40'};
 for ii1 = 1 : length(mass_fields)
     field = mass_fields{ii1};
     Geology.Mantle.Mass.Depleted.(field) = 'Compute_Mantle_Mass()';
@@ -107,7 +107,7 @@ clear ii1 field;
 
 % ~~~~~~~~~~~~~~~~~~~~ BSE ~~~~~~~~~~~~~~~~~~~~ %
 % % BSE.Mass % %
-Geology.BSE.Mass.Total = "Compute_Mantle_Mass()";
+Geology.BSE.Mass.Rock = "Compute_Mantle_Mass()";
 Geology.BSE.Mass.U = "Compute_Mantle_Mass()";
 Geology.BSE.Mass.Th = "Compute_Mantle_Mass()";
 Geology.BSE.Mass.K40 = "Compute_Mantle_Mass()";

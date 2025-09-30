@@ -1,4 +1,4 @@
-function Plot_One_Experiment_Signal(file_path, pic_dir)
+function Plot_One_Experiment_Signal(file_path, pic_dir, Plot)
 
 Res = load(file_path);
 
@@ -29,8 +29,10 @@ x_pos = 60;
 y_pos = y_lim(2) * 0.8;
 text(x_pos, y_pos, parameter_tex, 'FontSize', 12, 'BackgroundColor', 'white', 'EdgeColor', 'black');
 % text(X-value, Y_value) %
-pic_path = fullfile(pic_dir, sprintf('Geonu_Signals_Lithosphere_%s.jpg', name));
-print(pic_path, '-djpeg', '-r500');
+if Plot.Save
+    pic_path = fullfile(pic_dir, sprintf('Geonu_Signals_Lithosphere_%s.jpg', name));
+    print(pic_path, '-djpeg', '-r500');
+end
 % % ~~~~~~~~~~~~~~~~~~~~ Mantle ~~~~~~~~~~~~~~~~~~~~ % %
 pd = fitdist(sig_mantle(:, 1), 'Normal');
 mean_value = pd.mu;
@@ -50,8 +52,10 @@ x_pos = 60;
 y_pos = y_lim(2) * 0.8;
 text(x_pos, y_pos, parameter_tex, 'FontSize', 12, 'BackgroundColor', 'white', 'EdgeColor', 'black');
 % text(X-value, Y_value) %
-pic_path = fullfile(pic_dir, sprintf('Geonu_Signals_Lithosphere_%s.jpg', name));
-print(pic_path, '-djpeg', '-r500');
+if Plot.Save
+    pic_path = fullfile(pic_dir, sprintf('Geonu_Signals_Lithosphere_%s.jpg', name));
+    print(pic_path, '-djpeg', '-r500');
+end
 % % ~~~~~~~~~~~~~~~~~~~~ Total ~~~~~~~~~~~~~~~~~~~~ % %
 pd = fitdist(sig_total(:, 1), 'Normal');
 mean_value = pd.mu;
@@ -71,8 +75,10 @@ x_pos = 60;
 y_pos = y_lim(2) * 0.8;
 text(x_pos, y_pos, parameter_tex, 'FontSize', 12, 'BackgroundColor', 'white', 'EdgeColor', 'black');
 % text(X-value, Y_value) %
-pic_path = fullfile(pic_dir, sprintf('Geonu_Signals_Total_%s.jpg', name));
-print(pic_path, '-djpeg', '-r500');
+if Plot.Save
+    pic_path = fullfile(pic_dir, sprintf('Geonu_Signals_Total_%s.jpg', name));
+    print(pic_path, '-djpeg', '-r500');
+end
 % % ~~~~~~~~~~~~~~~~~~~~ U238 ~~~~~~~~~~~~~~~~~~~~ % %
 u238 = Res.Output.Lithosphere.Geonu_Signal.Total.U238 + Res.Output.Mantle.Geonu_Signal.Total.U238;
 pd = fitdist(u238(:, 1), 'Normal');
@@ -93,8 +99,10 @@ x_pos = 60;
 y_pos = y_lim(2) * 0.8;
 text(x_pos, y_pos, parameter_tex, 'FontSize', 12, 'BackgroundColor', 'white', 'EdgeColor', 'black');
 % text(X-value, Y_value) %
-pic_path = fullfile(pic_dir, sprintf('Geonu_Signals_238U_%s.jpg', name));
-print(pic_path, '-djpeg', '-r500');
+if Plot.Save
+    pic_path = fullfile(pic_dir, sprintf('Geonu_Signals_238U_%s.jpg', name));
+    print(pic_path, '-djpeg', '-r500');
+end
 % % ~~~~~~~~~~~~~~~~~~~~ TH232 ~~~~~~~~~~~~~~~~~~~~ % %
 th232 = Res.Output.Lithosphere.Geonu_Signal.Total.Th232 + Res.Output.Mantle.Geonu_Signal.Total.Th232;
 pd = fitdist(th232(:, 1), 'Normal');
@@ -115,7 +123,9 @@ x_pos = 60;
 y_pos = y_lim(2) * 0.8;
 text(x_pos, y_pos, parameter_tex, 'FontSize', 12, 'BackgroundColor', 'white', 'EdgeColor', 'black');
 % text(X-value, Y_value) %
-pic_path = fullfile(pic_dir, sprintf('Geonu_Signals_232Th_%s.jpg', name));
-print(pic_path, '-djpeg', '-r500');
+if Plot.Save
+    pic_path = fullfile(pic_dir, sprintf('Geonu_Signals_232Th_%s.jpg', name));
+    print(pic_path, '-djpeg', '-r500');
+end
 
 end

@@ -31,7 +31,21 @@ for ii1 = 1 : length(Interests_fields)
 end % ii1 for Interests
 
 % % Mass % %
-Interests_fields = {'Mass', 'Heat_Power'};
+Interests_fields = {'Mass'};
+Items_fields = {'Rock', 'U', 'Th', 'K'};
+for ii1 = 1 : length(Interests_fields)
+    interest = Interests_fields{ii1};
+    for ii2 = 1 : length(Layers)
+    layer = Layers{ii2};
+        for ii3 = 1 : length(Items_fields)
+            item = Items_fields{ii3};
+            Output.Lithosphere.(interest).(layer).(item) = 'Record';
+        end
+    end
+end
+
+% % Radiogenic Heat Power % %
+Interests_fields = {'Heat_Power'};
 Items_fields = {'Total', 'U', 'Th', 'K'};
 for ii1 = 1 : length(Interests_fields)
     interest = Interests_fields{ii1};
@@ -43,6 +57,7 @@ for ii1 = 1 : length(Interests_fields)
         end
     end
 end
+
 clear Interests_fields Layers State_fields Items_fields 
 clear interest layer state item;
 clear ii1 ii2 ii3

@@ -1,3 +1,4 @@
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % File Name       : Compute_Mantle_Variables.m
 % Description     : Compute variables used in mantle computation
@@ -15,12 +16,14 @@
 % Created On      : 2025-03-20
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 fprintf('Start to process: Mantle\n');
+layer_part = 'Mantle';
+
 % ~~~~~~~~~~~~~~~~~~~~ Mass ~~~~~~~~~~~~~~~~~~~~ %
 earth_mass = Generate_Random_Normal(5.97218e24, 6e19, iteration);
 x = 1.835e24 + 9.675e22; % Unit: kg; Mass of inner and outer core %
 core_mass = Generate_Random_Normal(x, x * 0.03 ,iteration); % Unit: kg %
 bse_mass = earth_mass - core_mass; % Unit: kg %
-mantle_mass = bse_mass - Output.Lithosphere.Mass.Total.Total; % Unit: kg %
+mantle_mass = bse_mass - Output.Lithosphere.Mass.Total.Rock; % Unit: kg %
 mantle_u_mass = bse_mass .* Geology.BSE.Abundance.U - Output.Lithosphere.Mass.Total.U; % Unit: kg %
 mantle_th_mass = bse_mass .* Geology.BSE.Abundance.Th - Output.Lithosphere.Mass.Total.Th; % Unit: kg %
 clear x;
@@ -58,8 +61,8 @@ mantle_ath_em(mantle_ath_em < 0) = 0;
 % ~~~~~~~~~~~~~~~~~~~~ Record ~~~~~~~~~~~~~~~~~~~~ %
 Geology.Other.Earth.Mass = earth_mass;
 Geology.Other.Core.Mass = core_mass;
-Geology.BSE.Mass.Total = bse_mass;
-Output.Mantle.Mass.Total.Total = Geology.BSE.Mass.Total - Output.Lithosphere.Mass.Total.Total;
+Geology.BSE.Mass.Rock = bse_mass;
+Output.Mantle.Mass.Total.Rock = Geology.BSE.Mass.Rock - Output.Lithosphere.Mass.Total.Rock;
 Geology.Mantle.Mass.Total.U = mantle_u_mass;
 Geology.Mantle.Mass.Total.Th = mantle_th_mass;
 Geology.Mantle.Abundance.Depleted.U = mantle_au_dm;

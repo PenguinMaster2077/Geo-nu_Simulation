@@ -15,32 +15,23 @@
 % Created On      : 2025-04-03
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 fprintf('Start to record: %s\n', name_layer);
-% ~~~~~~~~~~~~~~~~~~~~ Each Layer ~~~~~~~~~~~~~~~~~~~~ %
-Output.Lithosphere.Mass.(name_layer).U = sum(mass_u, 1)';
-Output.Lithosphere.Mass.(name_layer).Th = sum(mass_th, 1)';
-Output.Lithosphere.Mass.(name_layer).Total = Output.Lithosphere.Mass.(name_layer).U + Output.Lithosphere.Mass.(name_layer).Th;
 
-Output.Lithosphere.Geonu_Signal.(name_layer).U238 = sum(signal_u, 1)';
-Output.Lithosphere.Geonu_Signal.(name_layer).Th232 = sum(signal_th, 1)';
-Output.Lithosphere.Geonu_Signal.(name_layer).Total = Output.Lithosphere.Geonu_Signal.(name_layer).U238 + Output.Lithosphere.Geonu_Signal.(name_layer).Th232;
+run(fullfile(baseDir, "Functions", "Output", "Recording_Mass.m"));
+run(fullfile(baseDir, "Functions", "Output", "Recording_Signal_Rate.m"));
 
-Output.Lithosphere.Geonu_Flux.(name_layer).U238 = sum(flux_u, 1)';
-Output.Lithosphere.Geonu_Flux.(name_layer).Th232 = sum(flux_th, 1)';
+% ~~~~~~~~~~~~~~~~~~~~ ADVANCE ~~~~~~~~~~~~~~~~~~~~ %
+Output.Lithosphere.Geonu_Flux.(name_layer).U238 = sum(FLUX_U, 1)';
+Output.Lithosphere.Geonu_Flux.(name_layer).Th232 = sum(FLUX_TH, 1)';
 Output.Lithosphere.Geonu_Flux.(name_layer).Total = Output.Lithosphere.Geonu_Flux.(name_layer).U238 + Output.Lithosphere.Geonu_Flux.(name_layer).Th232;
 
 % ~~~~~~~~~~~~~~~~~~~~ LM and Total ~~~~~~~~~~~~~~~~~~~~ %
 if strcmp(name_layer, 'LM')
     layers = {'s1', 's2', 's3', 'UC', 'MC', 'LC', 'LM'};
-    template = 0 .* Output.Lithosphere.Mass.s1.Total;
-    Output.Lithosphere.Mass.Total.Total = template;
-    Output.Lithosphere.Mass.Total.U = template;
-    Output.Lithosphere.Mass.Total.Th = template;
-    Output.Lithosphere.Geonu_Signal.Total.Total = template;
-    Output.Lithosphere.Geonu_Signal.Total.U238 = template;
-    Output.Lithosphere.Geonu_Signal.Total.Th232 = template;
+    template = 0 .* Output.Lithosphere.Geonu_Flux.s1.Total;
     Output.Lithosphere.Geonu_Flux.Total.Total = template;
     Output.Lithosphere.Geonu_Flux.Total.U238 = template;
     Output.Lithosphere.Geonu_Flux.Total.Th232 = template;
+
     Output.Lithosphere.Heat_Power.Total.Total = template;
     Output.Lithosphere.Heat_Power.Total.U = template;
     Output.Lithosphere.Heat_Power.Total.Th = template;
@@ -52,13 +43,6 @@ if strcmp(name_layer, 'LM')
     % % Add up all layers % %
     for ii1 = 1 : length(layers)
         layer = layers{ii1};
-        Output.Lithosphere.Mass.Total.U = Output.Lithosphere.Mass.Total.U + Output.Lithosphere.Mass.(layer).U;
-        Output.Lithosphere.Mass.Total.Th = Output.Lithosphere.Mass.Total.Th + Output.Lithosphere.Mass.(layer).Th;
-        Output.Lithosphere.Mass.Total.Total = Output.Lithosphere.Mass.Total.Total + Output.Lithosphere.Mass.(layer).Total;
-        
-        Output.Lithosphere.Geonu_Signal.Total.U238 = Output.Lithosphere.Geonu_Signal.Total.U238 + Output.Lithosphere.Geonu_Signal.(layer).U238;
-        Output.Lithosphere.Geonu_Signal.Total.Th232 = Output.Lithosphere.Geonu_Signal.Total.Th232 + Output.Lithosphere.Geonu_Signal.(layer).Th232;
-
         Output.Lithosphere.Geonu_Flux.Total.U238 = Output.Lithosphere.Geonu_Flux.Total.U238 + Output.Lithosphere.Geonu_Flux.(layer).U238;
         Output.Lithosphere.Geonu_Flux.Total.Th232 = Output.Lithosphere.Geonu_Flux.Total.Th232 + Output.Lithosphere.Geonu_Flux.(layer).Th232;
         
@@ -70,7 +54,6 @@ if strcmp(name_layer, 'LM')
         Output.Lithosphere.Heat_Power.Total.U = Output.Lithosphere.Heat_Power.Total.U + Output.Lithosphere.Heat_Power.(layer).U;
         Output.Lithosphere.Heat_Power.Total.Th = Output.Lithosphere.Heat_Power.Total.Th + Output.Lithosphere.Heat_Power.(layer).Th;
     end
-    Output.Lithosphere.Geonu_Signal.Total.Total = Output.Lithosphere.Geonu_Signal.Total.U238 + Output.Lithosphere.Geonu_Signal.Total.Th232;
     Output.Lithosphere.Geonu_Flux.Total.Total = Output.Lithosphere.Geonu_Flux.Total.U238 + Output.Lithosphere.Geonu_Flux.Total.Th232;
     Output.Lithosphere.Heat_Power.Total.Total = Output.Lithosphere.Heat_Power.Total.U + Output.Lithosphere.Heat_Power.Total.Th;
     

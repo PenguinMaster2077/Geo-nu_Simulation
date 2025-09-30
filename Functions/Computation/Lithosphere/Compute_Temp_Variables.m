@@ -41,6 +41,7 @@ if strcmp(name_layer, 'MC') && strcmp(name_deepcrust, 'Huang')
     mafic_Th = Geology.Lithosphere.Model.DeepCrust.Amphibolite.Mafic.Th; % Column vector %
     mafic_K = Geology.Lithosphere.Model.DeepCrust.Amphibolite.Mafic.K; % Column vector %
     K_Ratio = Physics.Elements.Abundance.Mass.K40;
+    
 % ~~~~~~~~~~~~~~~~~~~~ MC + Bivariate ~~~~~~~~~~~~~~~~~~~~ %
 elseif strcmp(name_layer, 'MC') && strcmp(name_deepcrust, 'Bivariate')
     cor_biv_sio2 = Geology.Lithosphere.Model.Correlation.MC.DeepCrust.Bivar.SiO2;
@@ -53,6 +54,7 @@ elseif strcmp(name_layer, 'MC') && strcmp(name_deepcrust, 'Bivariate')
     am_th = Geology.Lithosphere.Model.DeepCrust.Bivart.amp.Th.fit.param;
     am_k20 = Geology.Lithosphere.Model.DeepCrust.Bivart.amp.K2O.fit.param;
     k_k20 = Physics.Constants.Others.K_K2O;
+
 % ~~~~~~~~~~~~~~~~~~~~ LC + Huang ~~~~~~~~~~~~~~~~~~~~ %
 elseif strcmp(name_layer, 'LC') && strcmp(name_deepcrust, 'Huang')
     cor_end = Geology.Lithosphere.Model.Correlation.(name_layer).DeepCrust.End.Vp; % Column vector %
@@ -66,6 +68,7 @@ elseif strcmp(name_layer, 'LC') && strcmp(name_deepcrust, 'Huang')
     mafic_Th = Geology.Lithosphere.Model.DeepCrust.Granulite.Mafic.Th; % Column vector %
     mafic_K = Geology.Lithosphere.Model.DeepCrust.Granulite.Mafic.K; % Column vector %
     K_Ratio = Physics.Elements.Abundance.Mass.K40;
+
 % ~~~~~~~~~~~~~~~~~~~~ LC + Bivarit ~~~~~~~~~~~~~~~~~~~~ %
 elseif strcmp(name_layer, 'LC') && strcmp(name_deepcrust, 'Bivariate')
     cor_biv_sio2 = Geology.Lithosphere.Model.Correlation.LC.DeepCrust.Bivar.SiO2;
@@ -78,6 +81,7 @@ elseif strcmp(name_layer, 'LC') && strcmp(name_deepcrust, 'Bivariate')
     gr_th = Geology.Lithosphere.Model.DeepCrust.Bivart.gran.Th.fit.param;
     gr_k20 = Geology.Lithosphere.Model.DeepCrust.Bivart.gran.K2O.fit.param;
     k_k20 = Physics.Constants.Others.K_K2O;
+
 % ~~~~~~~~~~~~~~~~~~~~ LM ~~~~~~~~~~~~~~~~~~~~ %
 elseif strcmp(name_layer, 'LM')
     moho = Geology.Lithosphere.Model.GeoPhys.moho;

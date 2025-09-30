@@ -5,11 +5,11 @@ if strcmp('GLOBAL', version) == 1
     pic_dir = fullfile(baseDir, "Pics", Plot.Global_Version);
     % ~~~~~ Signal Rate Distribution ~~~~~ %
     if Plot.Signal
-        Plot_One_Experiment_Signal(file_path, pic_dir);
+        Plot_One_Experiment_Signal(file_path, pic_dir, Plot);
     end
     % ~~~~~ Radiogenic Heat Power ~~~~~ %
     if Plot.Heat
-        Plot_One_Experiment_Heat_Power(file_path, pic_dir);
+        Plot_One_Experiment_Heat_Power(file_path, pic_dir, Plot);
     end
     % ~~~~~ Clear Variables ~~~~~ %
     clear file_path pic_dir;

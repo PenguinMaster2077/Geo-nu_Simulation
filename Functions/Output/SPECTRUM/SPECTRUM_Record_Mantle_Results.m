@@ -14,27 +14,16 @@
 % Created On      : 2025-03-26
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 fprintf('Start to record: Mantle\n');
-% ~~~~~~~~~~~~~~~~~~~~ Record ~~~~~~~~~~~~~~~~~~~~ %
-Output.Mantle.Geonu_Spectrum.Depleted.U238 = spectrum_u_dm;
-Output.Mantle.Geonu_Spectrum.Depleted.Th232 = spectrum_th_dm;
+% run(fullfile(baseDir, "Functions", "Output", "Recording_Signal_Rate.m"));
+% ~~~~~~~~~~~~~~~~~~~~ Spectrum ~~~~~~~~~~~~~~~~~~~~ %
+Output.Mantle.Geonu_Spectrum.Depleted.U238 = SPECTRUM_U_DM;
+Output.Mantle.Geonu_Spectrum.Depleted.Th232 = SPECTRUM_TH_DM;
 Output.Mantle.Geonu_Spectrum.Depleted.Total = Output.Mantle.Geonu_Spectrum.Depleted.U238 + Output.Mantle.Geonu_Spectrum.Depleted.Th232;
 
-Output.Mantle.Geonu_Spectrum.Enriched.U238 = spectrum_u_em;
-Output.Mantle.Geonu_Spectrum.Enriched.Th232 = spectrum_th_em;
+Output.Mantle.Geonu_Spectrum.Enriched.U238 = SPECTRUM_U_EM;
+Output.Mantle.Geonu_Spectrum.Enriched.Th232 = SPECTRUM_TH_EM;
 Output.Mantle.Geonu_Spectrum.Enriched.Total = Output.Mantle.Geonu_Spectrum.Enriched.U238 + Output.Mantle.Geonu_Spectrum.Enriched.Th232;
 
 Output.Mantle.Geonu_Spectrum.Total.U238 = Output.Mantle.Geonu_Spectrum.Depleted.U238 + Output.Mantle.Geonu_Spectrum.Enriched.U238;
 Output.Mantle.Geonu_Spectrum.Total.Th232 = Output.Mantle.Geonu_Spectrum.Depleted.Th232 + Output.Mantle.Geonu_Spectrum.Enriched.Th232;
 Output.Mantle.Geonu_Spectrum.Total.Total = Output.Mantle.Geonu_Spectrum.Total.U238 + Output.Mantle.Geonu_Spectrum.Total.Th232;
-
-Output.Mantle.Geonu_Signal.Depleted.U238 = sum(spectrum_u_dm, 2);
-Output.Mantle.Geonu_Signal.Depleted.Th232 = sum(spectrum_th_dm, 2);
-Output.Mantle.Geonu_Signal.Depleted.Total = Output.Mantle.Geonu_Signal.Depleted.U238 + Output.Mantle.Geonu_Signal.Depleted.Th232;
-
-Output.Mantle.Geonu_Signal.Enriched.U238 = sum(spectrum_u_em, 2);
-Output.Mantle.Geonu_Signal.Enriched.Th232 = sum(spectrum_th_em, 2);
-Output.Mantle.Geonu_Signal.Enriched.Total = Output.Mantle.Geonu_Signal.Enriched.U238 + Output.Mantle.Geonu_Signal.Enriched.Th232;
-
-Output.Mantle.Geonu_Signal.Total.U238 = Output.Mantle.Geonu_Signal.Depleted.U238 + Output.Mantle.Geonu_Signal.Enriched.U238;
-Output.Mantle.Geonu_Signal.Total.Th232 = Output.Mantle.Geonu_Signal.Depleted.Th232 + Output.Mantle.Geonu_Signal.Enriched.Th232;
-Output.Mantle.Geonu_Signal.Total.Total = Output.Mantle.Geonu_Signal.Total.U238 + Output.Mantle.Geonu_Signal.Total.Th232;
