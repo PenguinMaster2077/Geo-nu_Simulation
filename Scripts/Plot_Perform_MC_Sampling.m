@@ -18,7 +18,8 @@ lookup = [
 
 % ---------- MC Sampling ---------- %
 iteration = Plot.Times;
-correlation_table = Generate_Random_Standard_Normal(iteration);
+correlation_density = Generate_Random_Standard_Normal(iteration);
+correlation_abundance = Generate_Random_Standard_Normal(iteration);
 Signal_U238 = zeros(length(lookup), iteration);
 Signal_Th232 = zeros(length(lookup), iteration);
 
@@ -36,9 +37,9 @@ for index = 1 : length(lookup)
     gp_u238 = sum(Result.GP.U238(idx, 1));
     gp_th232 = sum(Result.GP.Th232(idx, 1));
    
-    temp_density = Generate_Random_Normal(rock_density, rock_density_error, 0, correlation_table);
-    temp_au238 = Generate_Random_Log_Normal(aU238, aU238_Perror, aU238_Nerror, 0, correlation_table);
-    temp_ath232 = Generate_Random_Log_Normal(aTh232, aTh232_Perror, aTh232_Nerror, 0, correlation_table);
+    temp_density = Generate_Random_Normal(rock_density, rock_density_error, 0, correlation_density);
+    temp_au238 = Generate_Random_Log_Normal(aU238, aU238_Perror, aU238_Nerror, 0, correlation_abundance);
+    temp_ath232 = Generate_Random_Log_Normal(aTh232, aTh232_Perror, aTh232_Nerror, 0, correlation_abundance);
     
     Signal_U238(index, :) = temp_density .* temp_au238 .* gp_u238;
     Signal_Th232(index, :) = temp_density .* temp_ath232 .* gp_th232;

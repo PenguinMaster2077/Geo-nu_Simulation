@@ -37,15 +37,15 @@ if strcmp(layer_part, 'Lithosphere')
     end
 elseif strcmp(layer_part, 'Mantle')
     fprintf('Mantle: Recording Signal Rate\n');
-    Output.Mantle.Geonu_Signal.Depleted.U238 = sum(SIGNAL_U_DM, 1)';
-    Output.Mantle.Geonu_Signal.Depleted.Th232 = sum(SIGNAL_TH_DM, 1)';
-    Output.Mantle.Geonu_Signal.Depleted.Total = Output.Mantle.Geonu_Signal.Depleted.U238 + Output.Mantle.Geonu_Signal.Depleted.Th232;
+    Output.Mantle.Geonu_Signal.DM.U238 = sum(SIGNAL_U_DM, 1)';
+    Output.Mantle.Geonu_Signal.DM.Th232 = sum(SIGNAL_TH_DM, 1)';
+    Output.Mantle.Geonu_Signal.DM.Total = Output.Mantle.Geonu_Signal.DM.U238 + Output.Mantle.Geonu_Signal.DM.Th232;
     
-    Output.Mantle.Geonu_Signal.Enriched.U238 = sum(SIGNAL_U_EM, 1)';
-    Output.Mantle.Geonu_Signal.Enriched.Th232 = sum(SIGNAL_TH_EM, 1)';
-    Output.Mantle.Geonu_Signal.Enriched.Total = Output.Mantle.Geonu_Signal.Enriched.U238 + Output.Mantle.Geonu_Signal.Enriched.Th232;
+    Output.Mantle.Geonu_Signal.EM.U238 = sum(SIGNAL_U_EM, 1)';
+    Output.Mantle.Geonu_Signal.EM.Th232 = sum(SIGNAL_TH_EM, 1)';
+    Output.Mantle.Geonu_Signal.EM.Total = Output.Mantle.Geonu_Signal.EM.U238 + Output.Mantle.Geonu_Signal.EM.Th232;
     
-    Output.Mantle.Geonu_Signal.Total.U238 = Output.Mantle.Geonu_Signal.Depleted.U238 + Output.Mantle.Geonu_Signal.Enriched.U238;
-    Output.Mantle.Geonu_Signal.Total.Th232 = Output.Mantle.Geonu_Signal.Depleted.Th232 + Output.Mantle.Geonu_Signal.Enriched.Th232;
+    Output.Mantle.Geonu_Signal.Total.U238 = Output.Mantle.Geonu_Signal.DM.U238 + Output.Mantle.Geonu_Signal.EM.U238;
+    Output.Mantle.Geonu_Signal.Total.Th232 = Output.Mantle.Geonu_Signal.DM.Th232 + Output.Mantle.Geonu_Signal.EM.Th232;
     Output.Mantle.Geonu_Signal.Total.Total = Output.Mantle.Geonu_Signal.Total.U238 + Output.Mantle.Geonu_Signal.Total.Th232;
 end

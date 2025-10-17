@@ -46,7 +46,7 @@ Output.Mantle.Heat_Power.Enriched.U = hp_res_u .* sum(MASS_U_EM, 1)';
 Output.Mantle.Heat_Power.Enriched.Th = hp_res_th .* sum(MASS_TH_EM, 1)';
 Output.Mantle.Heat_Power.Enriched.Total = Output.Mantle.Heat_Power.Enriched.U + Output.Mantle.Heat_Power.Enriched.Th;
 
-Output.Mantle.Heat_Power.Total.U = Output.Mantle.Heat_Power.Depleted.U + Output.Mantle.Heat_Power.Depleted.Th;
+Output.Mantle.Heat_Power.Total.U = Output.Mantle.Heat_Power.Depleted.U + Output.Mantle.Heat_Power.Enriched.U;
 Output.Mantle.Heat_Power.Total.Th = Output.Mantle.Heat_Power.Depleted.Th + Output.Mantle.Heat_Power.Enriched.Th;
 Output.Mantle.Heat_Power.Total.Total = Output.Mantle.Heat_Power.Total.U + Output.Mantle.Heat_Power.Total.Th;
 

@@ -88,8 +88,8 @@ Geology.Mantle.Correlation = 'Generate_Correlations()';
 abundance_fields = {'U', 'Th', 'K'};
 for ii1 = 1 : length(abundance_fields)
     field = abundance_fields{ii1};
-    Geology.Mantle.Abundance.Depleted.(field) = 'Compute_Mantle_Mass()';
-    Geology.Mantle.Abundance.Enriched.(field) = 'Compute_Mantle_Mass()';
+    Geology.Mantle.Abundance.DM.(field) = 'Compute_Mantle_Mass()';
+    Geology.Mantle.Abundance.EM.(field) = 'Compute_Mantle_Mass()';
 end
 
 % % Mantle.Mass % %
@@ -99,8 +99,8 @@ Geology.Mantle.Mass.Total.Th = 'Compute_Mantle_Mass()';
 mass_fields = {'Rock', 'U238', 'U235', 'U', 'Th232', 'K40'};
 for ii1 = 1 : length(mass_fields)
     field = mass_fields{ii1};
-    Geology.Mantle.Mass.Depleted.(field) = 'Compute_Mantle_Mass()';
-    Geology.Mantle.Mass.Enriched.(field) = 'Compute_Mantle_Mass()';
+    Geology.Mantle.Mass.DM.(field) = 'Compute_Mantle_Mass()';
+    Geology.Mantle.Mass.EM.(field) = 'Compute_Mantle_Mass()';
 end
 clear abundance_fields mass_fields;
 clear ii1 field;

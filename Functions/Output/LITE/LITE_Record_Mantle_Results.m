@@ -14,4 +14,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 fprintf('Start to record: Mantle\n');
 
+run(fullfile(baseDir, "Functions", "Output", "Recording_Mass.m"));
 run(fullfile(baseDir, "Functions", "Output", "Recording_Signal_Rate.m"));
+run(fullfile(baseDir, "Functions", "Output", "Recording_Abundance.m"));
+run(fullfile(baseDir, "Functions", "Output", "Recording_Radiogenic_Heat_Power.m"));

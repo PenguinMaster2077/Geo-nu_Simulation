@@ -1,6 +1,6 @@
 test*
-Output/**/.rar
-Output/**/*.mat
+**/*.rar
+**/*.mat
 Pics
 *.aux
 *.bbl
@@ -9,5 +9,5 @@ Pics
 *.gz
 *.toc
 Ref
-*.asv
 temp*
+**/*.asv

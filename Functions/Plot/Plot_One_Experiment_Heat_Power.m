@@ -25,6 +25,7 @@ heat_mantle = Res.Output.Mantle.Heat_Power.Total.Total .* 1e-12; % Unit: TW %
 heat_total = heat_lith + heat_mantle; % Unit: TW %
 heat_mantle = heat_mantle(heat_mantle ~= 0);  % Drop 0 values %
 heat_total = heat_total(heat_total ~= 0); % Drop 0 values %
+
 % % ~~~~~~~~~~~~~~~~~~~~ Lithosphere ~~~~~~~~~~~~~~~~~~~~ % %
 pd = fitdist(heat_lith(:, 1), 'Normal');
 mean_value = pd.mu;
@@ -45,6 +46,7 @@ text(x_pos, y_pos, parameter_tex, 'FontSize', 12, 'BackgroundColor', 'white', 'E
 if Plot.Save
     pic_path = fullfile(pic_dir, sprintf('Heat_Power_Lithosphere_%s.jpg', name));
     print(pic_path, '-djpeg', '-r500');
+    fprintf('[Plot_One_Experiment_Heat_Power] Figure saved to: %s\n', pic_path);
 end
 
 % % ~~~~~~~~~~~~~~~~~~~~ Mantle ~~~~~~~~~~~~~~~~~~~~ % %
@@ -67,6 +69,7 @@ text(x_pos, y_pos, parameter_tex, 'FontSize', 12, 'BackgroundColor', 'white', 'E
 if Plot.Save
     pic_path = fullfile(pic_dir, sprintf('Heat_Power_Mantle_%s.jpg', name));
     print(pic_path, '-djpeg', '-r500');
+    fprintf('[Plot_One_Experiment_Heat_Power] Figure saved to: %s\n', pic_path);
 end
 
 % % ~~~~~~~~~~~~~~~~~~~~ Total ~~~~~~~~~~~~~~~~~~~~ % %
@@ -89,6 +92,7 @@ text(x_pos, y_pos, parameter_tex, 'FontSize', 12, 'BackgroundColor', 'white', 'E
 if Plot.Save
     pic_path = fullfile(pic_dir, sprintf('Heat_Power_Total_%s.jpg', name));
     print(pic_path, '-djpeg', '-r500');
+    fprintf('[Plot_One_Experiment_Heat_Power] Figure saved to: %s\n', pic_path);
 end
 
 % % ~~~~~~~~~~~~~~~~~~~~ U ~~~~~~~~~~~~~~~~~~~~ % %
@@ -113,9 +117,10 @@ text(x_pos, y_pos, parameter_tex, 'FontSize', 12, 'BackgroundColor', 'white', 'E
 if Plot.Save
     pic_path = fullfile(pic_dir, sprintf('Heat_Power_238U_%s.jpg', name));
     print(pic_path, '-djpeg', '-r500');
+    fprintf('[Plot_One_Experiment_Heat_Power] Figure saved to: %s\n', pic_path);
 end
 
-% % ~~~~~~~~~~~~~~~~~~~~ TH232 ~~~~~~~~~~~~~~~~~~~~ % %
+% % ~~~~~~~~~~~~~~~~~~~~ 232Th ~~~~~~~~~~~~~~~~~~~~ % %
 th = Res.Output.Lithosphere.Heat_Power.Total.Th + Res.Output.Mantle.Heat_Power.Total.Th;
 th = th .* 1e-12; % Unit: TW %
 pd = fitdist(th(:, 1), 'Normal');
@@ -137,6 +142,7 @@ text(x_pos, y_pos, parameter_tex, 'FontSize', 12, 'BackgroundColor', 'white', 'E
 if Plot.Save
     pic_path = fullfile(pic_dir, sprintf('Heat_Power_232Th_%s.jpg', name));
     print(pic_path, '-djpeg', '-r500');
+    fprintf('[Plot_One_Experiment_Heat_Power] Figure saved to: %s\n', pic_path);
 end
 
 end

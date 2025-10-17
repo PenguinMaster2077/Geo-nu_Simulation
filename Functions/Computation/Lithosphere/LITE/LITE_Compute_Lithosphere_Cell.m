@@ -1,4 +1,4 @@
-function [MASS_ROCK, MASS_U, MASS_TH,  SIGNAL_U, SIGNAL_TH, PRESSURE_TO_LAYER]...
+function [MASS_ROCK, MASS_U, MASS_TH, SIGNAL_U, SIGNAL_TH, PRESSURE_TO_LAYER]...
     = LITE_Compute_Lithosphere_Cell(index, iteration, name_model, name_layer,...
     last_layer_pressure, detector, cor_array, array_for_radius, array_for_mass, array_for_abundance,...
     array_for_signal)
@@ -91,7 +91,7 @@ uncertainty = 0.12;
 depth_mean = array_for_radius(3); % Unit: m; single value %
 error = uncertainty * depth_mean; % Unit: m %
 DEPTH = Generate_Random_Normal(depth_mean, error, 0, cor); % Unit: m; column vector %
-DEPTH(DEPTH < 0) = 0;
+% DEPTH(DEPTH < 0) = 0;
 DEPTH = DEPTH'; % Convert to row vector %
 % % Clear Variables % %
 clear cor uncertainty depth_mean error;

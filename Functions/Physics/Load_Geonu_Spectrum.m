@@ -31,9 +31,9 @@ global baseDir;
 if strcmp(method, 'Enomoto')
     Spectrum = load(fullfile(baseDir, "Input_Files", "Enomoto2007_AntineutrinoSpectrum.mat"));
     name = 'enomoto';
-elseif strcmp(method, 'Yufeng')
-    Spectrum = load(fullfile(baseDir, "Input_Files", "Yufeng2024_AntineutrinoSpectrum.mat"));
-    name = 'Yufeng';
+elseif strcmp(method, 'Li & Xin')
+    Spectrum = load(fullfile(baseDir, "Input_Files", "Li_Xin2024_AntineutrinoSpectrum.mat"));
+    name = 'Li_Xin';
 end
 
 % % ~~~~~~~~~~~~~~~~~~~~ Set Energy Bins ~~~~~~~~~~~~~~~~~~~~ % %
@@ -73,6 +73,6 @@ Physics.Elements.Spectrum.Total_Number.Th232 = sum(Physics.Elements.Spectrum.dn_
 % Physics.Elements.Spectrum.Total_Number.K40 = sum(Physics.Elements.Spectrum.dn_dE.K40);
 
 % ~~~~~~~~~~~~~~~~~~~~ Output Message ~~~~~~~~~~~~~~~~~~~~ %
-% disp('[Physics::Load_Geonu_Spectrum] Geonu spectrum is complete');
+disp('[Physics::Load_Geonu_Spectrum] Geonu spectrum is complete');
 
 end

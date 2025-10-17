@@ -63,12 +63,15 @@ Geology.Other.Earth.Mass = earth_mass;
 Geology.Other.Core.Mass = core_mass;
 Geology.BSE.Mass.Rock = bse_mass;
 Output.Mantle.Mass.Total.Rock = Geology.BSE.Mass.Rock - Output.Lithosphere.Mass.Total.Rock;
+Output.Mantle.Mass.DM.Rock = Output.Mantle.Mass.Total.Rock .* prop_dm;
+Output.Mantle.Mass.EM.Rock = Output.Mantle.Mass.Total.Rock .* prop_em;
+
 Geology.Mantle.Mass.Total.U = mantle_u_mass;
 Geology.Mantle.Mass.Total.Th = mantle_th_mass;
-Geology.Mantle.Abundance.Depleted.U = mantle_au_dm;
-Geology.Mantle.Abundance.Depleted.Th = mantle_ath_dm;
-Geology.Mantle.Abundance.Enriched.U = mantle_au_em;
-Geology.Mantle.Abundance.Enriched.Th = mantle_ath_em;
+Geology.Mantle.Abundance.DM.U = mantle_au_dm;
+Geology.Mantle.Abundance.DM.Th = mantle_ath_dm;
+Geology.Mantle.Abundance.EM.U = mantle_au_em;
+Geology.Mantle.Abundance.EM.Th = mantle_ath_em;
 
 % % Clear % %
 clear earth_mass x core_mass bse_mass mantle_mass mantle_u_mass mantle_th_mass;

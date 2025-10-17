@@ -1,4 +1,4 @@
-function [SIGNAL_U_DM, SIGNAL_TH_DM, SIGNAL_U_EM, SIGNAL_TH_EM] = LITE_Compute_Mantle_Cell(index, detector, array_for_mass, array_for_abundance, array_for_signal)
+function [MASS_U_DM, MASS_TH_DM, MASS_U_EM, MASS_TH_EM, SIGNAL_U_DM, SIGNAL_TH_DM, SIGNAL_U_EM, SIGNAL_TH_EM] = LITE_Compute_Mantle_Cell(index, detector, array_for_mass, array_for_abundance, array_for_signal)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % File Name       : LITE_Compute_Mantle_Cell.m
 % Description     : Compute interests
@@ -18,6 +18,10 @@ function [SIGNAL_U_DM, SIGNAL_TH_DM, SIGNAL_U_EM, SIGNAL_TH_EM] = LITE_Compute_M
 %   - array_for_signal      : Variables used for signal rate calculation
 %
 % Output Parameters:
+%   - MASS_U_DM     (kg)                : Mass of uranium in DM
+%   - MASS_TH_DM    (kg)                : Mass of thorium in DM
+%   - MASS_U_EM     (kg)                : Mass of uranium in EM
+%   - MASS_TH_EM    (kg)                : Mass of thorium in EM
 %   - SIGNAL_U_DM   (TNU)               : Signal rate from uranium in DM
 %   - SIGNAL_TH_DM  (TNU)               : Signal rate from thorium in DM
 %   - SIGNAL_U_EM   (TNU)               : Signal rate from uranium in EM
@@ -159,6 +163,13 @@ dm_ath = array_for_abundance{2}; % Iteration * 1 %
 em_au = array_for_abundance{3}; % Iteration * 1 %
 em_ath = array_for_abundance{4}; % Iteration * 1 %
 
+% % MASS % %
+MASS_U_DM = (dm_au .* sum(MASS_LARGE_LAYERS(1: end - 1, 1), 1))';
+MASS_TH_DM = (dm_ath .* sum(MASS_LARGE_LAYERS(1: end - 1, 1), 1))';
+MASS_U_EM = (em_au   .* sum(MASS_LARGE_LAYERS(end, 1), 1))';
+MASS_TH_EM = (em_ath   .* sum(MASS_LARGE_LAYERS(end, 1), 1))';
+
+% % SIGNAL % %
 SIGNAL_U_DM = sum(bsxfun(@times, dm_au, geonu_signal_factor_u238(1 : end - 1, 1)'), 2);
 SIGNAL_TH_DM = sum(bsxfun(@times, dm_ath, geonu_signal_factor_th232(1: end - 1 , 1)'), 2);
 SIGNAL_U_EM = sum(bsxfun(@times, em_au, geonu_signal_factor_u238(end, 1)'), 2);

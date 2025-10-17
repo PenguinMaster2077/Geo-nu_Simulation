@@ -32,6 +32,6 @@ m32 = Physics.Oscillation.Parameters.delta_m32_square;
 
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
 Abundance = Geology.Mantle.Abundance;
-array_for_abundance = {Abundance.Depleted.U, Abundance.Depleted.Th, Abundance.Enriched.U, Abundance.Enriched.Th};
+array_for_abundance = {Abundance.DM.U, Abundance.DM.Th, Abundance.EM.U, Abundance.EM.Th};
 array_for_signal = {Sig_Res_U238, Sig_Res_Th232, energy, p1, p2, p3, m21, m31, m32};
 clear Abundance;

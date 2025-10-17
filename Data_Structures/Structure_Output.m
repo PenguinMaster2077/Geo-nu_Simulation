@@ -32,7 +32,21 @@ end % ii1 for Interests
 
 % % Mass % %
 Interests_fields = {'Mass'};
-Items_fields = {'Rock', 'U', 'Th', 'K'};
+Items_fields = {'Rock', 'U', 'U238', 'U235', 'Th', 'K'};
+for ii1 = 1 : length(Interests_fields)
+    interest = Interests_fields{ii1};
+    for ii2 = 1 : length(Layers)
+    layer = Layers{ii2};
+        for ii3 = 1 : length(Items_fields)
+            item = Items_fields{ii3};
+            Output.Lithosphere.(interest).(layer).(item) = 'Record';
+        end
+    end
+end
+
+% % Abundance % %
+Interests_fields = {'Abundance'};
+Items_fields = {'U', 'U238', 'U235', 'Th', 'K'};
 for ii1 = 1 : length(Interests_fields)
     interest = Interests_fields{ii1};
     for ii2 = 1 : length(Layers)
@@ -46,7 +60,7 @@ end
 
 % % Radiogenic Heat Power % %
 Interests_fields = {'Heat_Power'};
-Items_fields = {'Total', 'U', 'Th', 'K'};
+Items_fields = {'Total', 'U', 'U238', 'U235', 'Th', 'K'};
 for ii1 = 1 : length(Interests_fields)
     interest = Interests_fields{ii1};
     for ii2 = 1 : length(Layers)
@@ -64,9 +78,39 @@ clear ii1 ii2 ii3
 
 % ~~~~~~~~~~~~~~~~~~~~ Mantle ~~~~~~~~~~~~~~~~~~~~ %
 % % Geonu Signal % %
-Interests_fields = {'Geonu_Signal', 'Geonu_Spectrum', 'Geonu_Flux'};
-Layers = {'Depleted', 'Enriched', 'Total'};
+Interests_fields = {'Geonu_Flux', 'Geonu_Signal', 'Geonu_Spectrum'};
+Layers = {'DM', 'EM', 'Total'};
 Items_fields = {'Total', 'U238', 'Th232'};
+for ii1 = 1 : length(Interests_fields)
+    interest = Interests_fields{ii1};
+    for ii2 = 1 : length(Layers)
+        layer = Layers{ii2};
+        for ii3 = 1 : length(Items_fields)
+            item = Items_fields{ii3};
+            Output.Mantle.(interest).(layer).(item) = 'Record';
+        end
+    end
+end
+
+% % Mass % %
+Interests_fields = {'Mass'};
+Layers = {'DM', 'EM', 'Total'};
+Items_fields = {'Rock','U', 'U238', 'U235', 'Th', 'K'};
+for ii1 = 1 : length(Interests_fields)
+    interest = Interests_fields{ii1};
+    for ii2 = 1 : length(Layers)
+        layer = Layers{ii2};
+        for ii3 = 1 : length(Items_fields)
+            item = Items_fields{ii3};
+            Output.Mantle.(interest).(layer).(item) = 'Record';
+        end
+    end
+end
+
+% % Abundance % %
+Interests_fields = {'Abundance'};
+Layers = {'DM', 'EM', 'Total'};
+Items_fields = {'U', 'U238', 'U235', 'Th', 'K'};
 for ii1 = 1 : length(Interests_fields)
     interest = Interests_fields{ii1};
     for ii2 = 1 : length(Layers)
@@ -80,8 +124,8 @@ end
 
 % % Radiogenic Power % %
 Interests_fields = {'Heat_Power'};
-Layers = {'Depleted', 'Enriched', 'Total'};
-Items_fields = {'Total', 'U', 'Th', 'K'};
+Layers = {'DM', 'EM', 'Total'};
+Items_fields = {'Total', 'U', 'U238', 'U235', 'Th', 'K'};
 for ii1 = 1 : length(Interests_fields)
     interest = Interests_fields{ii1};
     for ii2 = 1 : length(Layers)
@@ -95,4 +139,3 @@ end
 
 clear Interests_fields interest Layers layer Items_fields item;
 clear ii1 ii2 ii3;
-

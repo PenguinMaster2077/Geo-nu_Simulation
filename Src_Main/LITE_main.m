@@ -184,13 +184,20 @@ run(fullfile(baseDir, "Functions", "Computation", "Lithosphere", "LITE", "LITE_C
 run(fullfile(baseDir, "Functions", "Computation", "Mantle", "Compute_Mantle_Variables.m"));
 run(fullfile(baseDir, "Functions", "Computation", "Mantle", "LITE", "LITE_Generate_Temp_Variables_For_Parallel.m"));
 len = length(lonlat(:, 1));
+MASS_U_DM = zeros(len, iteration);
+MASS_TH_DM = zeros(len, iteration);
+MASS_U_EM = zeros(len, iteration);
+MASS_TH_EM = zeros(len, iteration);
 SIGNAL_U_DM = zeros(len, iteration);
 SIGNAL_TH_DM = zeros(len, iteration);
 SIGNAL_U_EM = zeros(len, iteration);
 SIGNAL_TH_EM = zeros(len, iteration);
 parfor ii1 = 1 : length(lonlat(:, 1))
     array_for_mass = {LAB(ii1, 1), lonlat(ii1, 1), lonlat(ii1, 2), surface_radius(ii1, 1), PREM};
-    [SIGNAL_U_DM(ii1, :), SIGNAL_TH_DM(ii1, :), SIGNAL_U_EM(ii1, :), SIGNAL_TH_EM(ii1, :)]...
+    [MASS_U_DM(ii1, :), MASS_TH_DM(ii1, :), ...
+        MASS_U_EM(ii1, :), MASS_TH_EM(ii1, :),...
+        SIGNAL_U_DM(ii1, :), SIGNAL_TH_DM(ii1, :),...
+        SIGNAL_U_EM(ii1, :), SIGNAL_TH_EM(ii1, :)]...
         = LITE_Compute_Mantle_Cell(ii1, detector, array_for_mass, array_for_abundance, array_for_signal);
 end
 run(fullfile(baseDir, "Functions", "Output", "LITE", "LITE_Record_Mantle_Results.m"));
