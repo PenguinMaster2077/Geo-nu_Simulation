@@ -28,18 +28,18 @@ if strcmp(layer_part, 'Lithosphere')
         Output.Lithosphere.Abundance.Total.Th = Output.Lithosphere.Mass.Total.Th ./ Output.Lithosphere.Mass.Total.Rock;
     end
 elseif strcmp(layer_part, 'Mantle')
-    Output.Mantle.Abundance.DM.U = Output.Mantle.Mass.DM.U ./ Output.Mantle.Mass.DM.Rock;
-    Output.Mantle.Abundance.DM.U238 = Output.Mantle.Mass.DM.U238 ./ Output.Mantle.Mass.DM.Rock;
-    Output.Mantle.Abundance.DM.U235 = Output.Mantle.Mass.DM.U235 ./ Output.Mantle.Mass.DM.Rock;
-    Output.Mantle.Abundance.DM.Th = Output.Mantle.Mass.DM.Th ./ Output.Mantle.Mass.DM.Rock;
+    Output.Mantle.Abundance.DM.U = Geology.Mantle.Abundance.DM.U;
+    Output.Mantle.Abundance.DM.U238 = Geology.Mantle.Abundance.DM.U238;
+    Output.Mantle.Abundance.DM.U235 = Geology.Mantle.Abundance.DM.U235;
+    Output.Mantle.Abundance.DM.Th = Geology.Mantle.Abundance.DM.Th;
 
-    Output.Mantle.Abundance.EM.U = Output.Mantle.Mass.EM.U ./ Output.Mantle.Mass.EM.Rock;
-    Output.Mantle.Abundance.EM.U238 = Output.Mantle.Mass.EM.U238 ./ Output.Mantle.Mass.EM.Rock;
-    Output.Mantle.Abundance.EM.U235 = Output.Mantle.Mass.EM.U235 ./ Output.Mantle.Mass.EM.Rock;
-    Output.Mantle.Abundance.EM.Th = Output.Mantle.Mass.EM.Th ./ Output.Mantle.Mass.EM.Rock;
+    Output.Mantle.Abundance.EM.U = Geology.Mantle.Abundance.EM.U;
+    Output.Mantle.Abundance.EM.U238 = Geology.Mantle.Abundance.EM.U238;
+    Output.Mantle.Abundance.EM.U235 = Geology.Mantle.Abundance.EM.U235;
+    Output.Mantle.Abundance.EM.Th = Geology.Mantle.Abundance.EM.Th;
 
-    Output.Mantle.Abundance.Total.U = Output.Mantle.Mass.Total.U ./ Output.Mantle.Mass.Total.Rock;
-    Output.Mantle.Abundance.Total.U238 = Output.Mantle.Mass.Total.U238 ./ Output.Mantle.Mass.Total.Rock;
-    Output.Mantle.Abundance.Total.U235 = Output.Mantle.Mass.Total.U235 ./ Output.Mantle.Mass.Total.Rock;
-    Output.Mantle.Abundance.Total.Th = Output.Mantle.Mass.Total.Th ./ Output.Mantle.Mass.Total.Rock;
+    Output.Mantle.Abundance.Total.U = Geology.Mantle.Abundance.Total.U;
+    Output.Mantle.Abundance.Total.U238 = Geology.Mantle.Abundance.Total.U238;
+    Output.Mantle.Abundance.Total.U235 = Geology.Mantle.Abundance.Total.U235;
+    Output.Mantle.Abundance.Total.Th = Geology.Mantle.Abundance.Total.Th;
 end

@@ -18,7 +18,7 @@ function Geology = Preallocate_Variables_Lithosphere(Geology)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % ~~~~~~~~~~~~~~~~~~~~ Preallocate Variables ~~~~~~~~~~~~~~~~~~~~ %
-layers = {'UC', 'MC', 'LC', 'LM', 's1', 's2', 's3'};
+layers = {'s1', 's2', 's3', 'UC', 'MC', 'LC', 'LM'};
 len_layer = length(layers);
 template = zeros(length(Geology.Lithosphere.Model.GeoPhys.lonlat), 3);
 for i = 1 : len_layer

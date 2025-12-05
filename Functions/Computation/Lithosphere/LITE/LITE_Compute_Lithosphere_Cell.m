@@ -134,7 +134,7 @@ clear RADIUS;
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Mass ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
 MASS_ROCK = DENSITY .* VOLUME; % Row Vector %
 % % Clear Variables % %
-clear VOLUME;
+%clear VOLUME;
 
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Temperature ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
 TEMPERATURE = 0; % Unit: ℃ %
@@ -296,7 +296,8 @@ if distance > subcell_limits(5)
     part2 = p2 .* sin(1.27 * m31 .* bsxfun(@rdivide, distance, energy')) .^2; % 1 * Energy %
     part3 = p3 .* sin(1.27 * m32 .* bsxfun(@rdivide, distance, energy')) .^2; % 1 * Energy %
     Pee = part1 + part2 + part3; % cell * Energy %
-    volume = Compute_Cell_Volume(lon_center - 0.5, lon_center + 0.5, lat_center - 0.5, lat_center + 0.5, surface_radius - depth_center - thickness_center/2, surface_radius - depth_center + thickness_center/2);
+    %volume = Compute_Cell_Volume(lon_center - 0.5, lon_center + 0.5, lat_center - 0.5, lat_center + 0.5, surface_radius - depth_center - thickness_center/2, surface_radius - depth_center + thickness_center/2);
+    volume = VOLUME;
     sig_factor_u238 = sum(volume .* sig_response_u238 .* Pee'); % Cell * 1 %
     sig_factor_th232 = sum(volume .* sig_response_th232 .* Pee'); % Cell * 1 %
     % Unit: m^5/kg %
@@ -356,7 +357,7 @@ else
             disp(name_layer);
             index
             ii2
-            disp('[Compute_Lithosphere_Cell] The count for 1st split is missing now!!!');
+            disp('[Compute_Lithosphere_Cell] The count for 1st split is missing now!!! Because there is no case the be checked.');
         end % end: if %
     end % end: for %
     % % % Clear Variables % % %

@@ -52,8 +52,7 @@ fprintf('[Test3] s1: Numers of nonzeros: %d\n', nnz(test));
 test = s3.Vs - crust_vs(:, 3);
 fprintf('[Test3] s3: Numers of nonzeros: %d\n', nnz(test));
 
-% Pro 2: A few of grids in each layer have different thickness compared to
-% the original data
+% Pro 2: A few of grids in each layer have different thickness compared to the original data
 layers = {'s1', 's2', 's3', 'UC', 'MC', 'LC'};
 water_index = 2;
 for ii1 = 1 : length(layers)
@@ -61,35 +60,27 @@ for ii1 = 1 : length(layers)
     test = eval([layer, '.thick']) - thickness(:, water_index + ii1);
     fprintf('[Problem 2] %s: Numers of nonzeros: %d\n', layer, nnz(test));
 end
+clear water_index ii1 layer test;
 
+% ---------- Creat New Dataset from CRUST1.0 ---------- %
+layers = {'s1', 's2', 's3', 'UC', 'MC', 'LC', 'LM'};
+start_index = 2;
+for ii1 = 1 : length(layers)
+    layer = layers{ii1};
+    if strcmp(layer, 'LM') == 0
+        eval([layer, '.depth = depth(:, start_index + ii1)']);
+        eval([layer, '.thick = thickness(:, start_index + ii1)']);
+    end
+    eval([layer, '.rho = crust_rho(:, start_index + ii1)']);
+    eval([layer, '.Vp = crust_vp(:, start_index + ii1)']);
+    eval([layer, '.Vs = crust_vs(:, start_index + ii1)']);
+end
 
-% % ---------- Check: Crust1 Structure ---------- %
-% Crust1.lonlat = Crust1.latlon;
-% Crust1.boundary = Crust1.elev;
-% Crust1.boundary(:, 3:end) = Crust1.boundary(:, 3:end) .* 1e3;
-% Crust1.rho(:, 3:end) = Crust1.rho(:, 3: end) .* 1e3;
-% Crust1 = rmfield(Crust1, 'latlon');
-% Crust1 = rmfield(Crust1, 'thick');
-% Crust1 = rmfield(Crust1, 'elev');
-% 
-% test = Crust1.boundary(:, 3:end) - crust_bound; num_nonzero = nnz(test); disp(num_nonzero);
-% test = Crust1.rho(:, 3:end) - crust_rho; disp(nnz(test));
-% test = Crust1.Vp(:, 3:end) - crust_vp; disp(nnz(test));
-% test = Crust1.Vs(:, 3:end) - crust_vs; disp(nnz(test));
-% clear test num_nonzero;
-% 
-% % ---------- Change: s1-s3, UC-LC ---------- %
-% layers = {'s1', 's2', 's3', 'UC', 'MC', 'LC'};
-% water_index = 2;
-% for ii1 = 1 : length(layers)
-%     layer = layers{ii1};
-%     eval([layer, '.thick = thickness(:, water_index + ii1);']);
-%     eval([layer, '.depth = depth(:, water_index + ii1);']);
-%     eval([layer, '.rho = crust_rho(:, water_index + ii1);']);
-%     eval([layer, '.Vp = crust_vp(:, water_index + ii1);']);
-%     eval([layer, '.Vs = crust_vs(:, water_index + ii1);']);
-%     eval([layer, ' = rmfield(', layer, ', ''elev'');']);
-% end
-% 
+Crust1.rho(:, 3 : end) = crust_rho;
+Crust1.Vp(:, 3 : end) = crust_vp;
+Crust1.Vs(:, 3 : end) = crust_vs;
+Crust1.lonlat = Crust1.latlon;
+Crust1 = rmfield(Crust1, 'latlon');
+
 % % ---------- Save ---------- %
-% save("Modified_CRUST1_Data.mat", 's1', 's2', 's3', 'UC', 'MC', 'LC', 'LM', 'Crust1');
+save("Modified_CRUST1_Data.mat", 's1', 's2', 's3', 'UC', 'MC', 'LC', 'LM', 'Crust1');

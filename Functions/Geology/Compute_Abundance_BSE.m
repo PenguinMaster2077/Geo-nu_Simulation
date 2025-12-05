@@ -26,11 +26,13 @@ cor = Geology.BSE.Correlation;
 U_mean = Geology.BSE.Abundance.U_Mean; % Unit: ppb %
 
 % % ~~~~~~~~~~~~~~~~~~~~ Mass Ratio ~~~~~~~~~~~~~~~~~~~~ % %
-% % % From https://www.sciencedirect.com/science/article/abs/pii/S0012821X18303807?via%3Dihub % % %
+% From Wipperfurth et al. (2018), https://doi.org/10.1016/j.epsl.2018.06.029,
+% and Arevalo et al. (2009), https://doi.org/10.1016/j.epsl.2008.12.023% %
 Th_U_Ratio = Generate_Random_Log_Normal(3.776, 0.122, 0.075, iteration, cor);
 K_U_Ratio = Generate_Random_Normal(13800, 1300, iteration, cor); % ? %
 
 % % ~~~~~~~~~~~~~~~~~~~~ Record ~~~~~~~~~~~~~~~~~~~~ % %
+% From tbl5 in McDonough & Sun (1995), https://doi.org/10.1016/0009-2541(94)00140-4 %
 Geology.BSE.Abundance.U = Generate_Random_Normal(U_mean, U_mean * 0.2, iteration, cor) * 1e-9; % Unit: g/g %
 % 1e-9 is used because ppb = 1e-9. The unit was not included in the input,
 % so the unit effect is accounted for here. %

@@ -18,7 +18,7 @@ lookup = [
 
 rock_type = Crust(:, 5);
 unique_rock_type = unique(rock_type);
-iteration = Geology.Iteration;
+iteration = 100000;
 % ---------- Final Data Structure ---------- %
 Results.Local_Crust.Density_Abundance_Table = lookup;
 Results.Local_Crust.Rock_Indices = zeros(length(unique_rock_type), 1);
@@ -77,8 +77,8 @@ for index = 1 : length(unique_rock_type)
 
     % ----- Recording ----- %
     Results.Local_Crust.Rock_Indices(index, 1) = type;
-    Results.Local_Crust.Correlation.Density(:, index) = correlation_density_table;
-    Results.Local_Crust.Correlation.Abundance(:, index) = correlation_density_table;
+    Results.Local_Crust.Correlation.Density(:, index) = correlation_density_table; % Iteration * Rock type %
+    Results.Local_Crust.Correlation.Abundance(:, index) = correlation_abundance_table; % Iteration * Rock type %
 end
 clear lookup rock_type unique_rock_type iteration;
 clear index type idx;
@@ -163,12 +163,12 @@ for iLayer = 1 : len_layers
     end
 
     % ----- Mass ----- %
-    mass_fileds = {'Rock', 'U', 'U238', 'U235', 'Th'};
-    for iFiled = 1 : length(mass_fileds)
-        filed = mass_fileds{iFiled};
+    mass_fields = {'Rock', 'U', 'U238', 'U235', 'Th'};
+    for iField = 1 : length(mass_fields)
+        filed = mass_fields{iField};
         Results.(target).Mass.(layer).(filed) = Output.Lithosphere.Mass.(layer).(filed) - Combination.Mass.(filed)(:, iLayer);
     end
-    clear iFiled mass_fileds filed;
+    clear iField mass_fields filed;
 
     % ----- Signal Rate ----- %
     signal_fileds = {'Total', 'U238', 'Th232'};
@@ -180,7 +180,7 @@ for iLayer = 1 : len_layers
             Results.(target).Geonu_Signal.(layer).(field) = Output.Lithosphere.Geonu_Signal.(layer).(field) - Combination.Geonu_Signal.(field)(:, iLayer);
         end
     end
-    clear signal_fileds iFiled field;
+    clear signal_fileds iField field;
 
     % ----- Radiogenic Heat Power ----- %
     heat_fields = {'Total', 'U', 'U238', 'U235', 'Th'};
@@ -192,14 +192,14 @@ for iLayer = 1 : len_layers
             Results.(target).Heat_Power.(layer).(field) = Output.Lithosphere.Heat_Power.(layer).(field) - Combination.Heat_Power.(field)(:, iLayer);
         end
     end
-    clear heat_fields field iFiled target;
+    clear heat_fields field iField target;
 end
 
 % ----- Far-Crust: Add up Mass ----- %
 layers = {'s1', 's2', 's3', 'UC', 'MC', 'LC'};
-mass_fileds = {'Rock', 'U', 'U238', 'U235', 'Th'};
-for iField = 1 : length(mass_fileds)
-    field = mass_fileds{iField};
+mass_fields = {'Rock', 'U', 'U238', 'U235', 'Th'};
+for iField = 1 : length(mass_fields)
+    field = mass_fields{iField};
     for iLayer = 1 : length(layers)
         layer = layers{iLayer};
         if iLayer == 1
@@ -208,12 +208,12 @@ for iField = 1 : length(mass_fileds)
         Results.Far_Crust.Mass.Total.(field) = Results.Far_Crust.Mass.Total.(field) + Results.Far_Crust.Mass.(layer).(field);
     end
 end
-clear mass_fileds iFiled field;
+clear mass_fields iField field;
 
 % ----- Far-Crust: Add up Signal Rate ----- %
-signal_field = {'Total','U238', 'Th232'};
-for iField = 1 : length(signal_field)
-    field = signal_field{iField};
+signal_fields = {'Total','U238', 'Th232'};
+for iField = 1 : length(signal_fields)
+    field = signal_fields{iField};
     for iLayer = 1 : length(layers)
         layer = layers{iLayer};
         if iLayer == 1
@@ -222,12 +222,12 @@ for iField = 1 : length(signal_field)
         Results.Far_Crust.Geonu_Signal.Total.(field) = Results.Far_Crust.Geonu_Signal.Total.(field) + Results.Far_Crust.Geonu_Signal.(layer).(field);
     end
 end
-clear signal_field iFiled field;
+clear signal_fields iField field;
 
 % ----- Far-Crust: Add up Radiogenic Heat Power ----- %
-heat_field = {'Total', 'U', 'U238', 'U235', 'Th'};
-for iField = 1 : length(heat_field)
-    field = heat_field{iField};
+heat_fields = {'Total', 'U', 'U238', 'U235', 'Th'};
+for iField = 1 : length(heat_fields)
+    field = heat_fields{iField};
     for iLayer = 1 : length(layers)
         layer = layers{iLayer};
         if iLayer == 1
@@ -236,7 +236,7 @@ for iField = 1 : length(heat_field)
         Results.Far_Crust.Heat_Power.Total.(field) = Results.Far_Crust.Heat_Power.Total.(field) + Results.Far_Crust.Heat_Power.(layer).(field);
     end
 end
-clear heat_field iFiled iLayer layer;
+clear heat_fields iField iLayer layer;
 
 % ---------- Mantle Results ---------- %
 fprintf('Recording mantle crust mass, signal rate and radiogenic heat power ...\n');
@@ -251,7 +251,7 @@ for iLayer = 1 : len_layers
         field = mass_field{iField};
         Results.Mantle.Mass.(layer).(field) = Output.Mantle.Mass.(layer).(field);
     end
-    clear mass_field iFiled field;
+    clear mass_field iField field;
 
     % ----- Signal Rate ----- %
     signal_fields = {'Total', 'U238', 'Th232'};
@@ -259,7 +259,7 @@ for iLayer = 1 : len_layers
         field = signal_fields{iField};
         Results.Mantle.Geonu_Signal.(layer).(field) = Output.Mantle.Geonu_Signal.(layer).(field);
     end
-    clear signal_fields iFiled field;
+    clear signal_fields iField field;
 
     % ----- Radiogenic Heat Power ----- %
     heat_fields = {'Total', 'U', 'U238', 'U235', 'Th'};
@@ -283,7 +283,7 @@ for iField = 1 : length(mass_fields)
         Results.Mantle.Mass.Total.(field) = Results.Mantle.Mass.Total.(field) + Results.Mantle.Mass.(layer).(field);
     end
 end
-clear mass_fields iFiled field iLayer layer;
+clear mass_fields iField field iLayer layer;
 
 % ----- Add up Signal Rate ----- %
 signal_fields = {'Total', 'U238', 'Th232'};
@@ -297,7 +297,7 @@ for iField = 1 : length(signal_fields)
         Results.Mantle.Geonu_Signal.Total.(field) = Results.Mantle.Geonu_Signal.Total.(field) + Results.Mantle.Geonu_Signal.(layer).(field);
     end
 end
-clear signal_fields iFiled field iLayer layer;
+clear signal_fields iField field iLayer layer;
 
 % ----- Add up Radiogenic Heat Power ----- %
 heat_fields = {'Total', 'U', 'U238', 'U235', 'Th'};
@@ -311,5 +311,5 @@ for iField = 1 : length(heat_fields)
         Results.Mantle.Heat_Power.Total.(field) = Results.Mantle.Heat_Power.Total.(field) + Results.Mantle.Heat_Power.(layer).(field);
     end
 end
-clear heat_field iField field iLayer layer;
+clear heat_fields iField field iLayer layer;
 clear layers len_layers;

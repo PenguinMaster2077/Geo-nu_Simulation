@@ -3,10 +3,10 @@ baseDir = pwd;
 addpath(fullfile(baseDir, "Creating_Crustal_Dataset"));
 dir = fullfile(baseDir, "Creating_Crustal_Dataset","LITHO1.0");
 % ---------- Load Raw Data ---------- %
-Original_Crust_Dataset_Path = 'D:\Geo-nu\GEONU-main\InputFiles\LithosphereModels\LITHO1_Data.mat';
+Original_Crust_Dataset_Path = 'D:\Geo-nu\GEONU-main\InputFiles\LithosphereModels\ECM1_Data.mat';
 load(Original_Crust_Dataset_Path);
 
-% ---------- No Problems ---------- %
+% ---------- Problems ---------- %
 layers = {'s1', 's2', 's3', 'UC', 'MC', 'LC'};
 for ii1 = 1 : length(layers)
     layer = layers{ii1};
@@ -19,9 +19,3 @@ for ii1 = 1 : length(layers)
     n1 = eval(['nnz(', layer, '.Vs);']);
     fprintf('%s: Num of nonzero in Vs: %f\n\n', layer, n1);
 end
-
-% ---------- Modify Litho1 Data Format ---------- %
-Litho1.lonlat = Litho1.latlon;
-Litho1 = rmfield(Litho1, 'latlon');
-
-save("Modified_LITHO1_Data.mat", 's1', 's2', 's3', 'UC', 'MC', 'LC', 'LM', 'Litho1', 'oc', 'cc');

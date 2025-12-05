@@ -26,18 +26,18 @@ Geology.Lithosphere.Model.Data = 'Load_Lithosphere_Data()';
 Geology.Lithosphere.Model.GeoPhys = 'Load_Lithosphere_Data()';
 
 % % % Lithosphere.Model.Method % % %
-Geology.Lithosphere.Model.Method.Near_Field = 'Input';
-Geology.Lithosphere.Model.Method.Deep_Crust = 'Input';
+Geology.Lithosphere.Model.Method.Near_Field = 'TBD';
+Geology.Lithosphere.Model.Method.Deep_Crust = 'Compute_Abundance_DeepCrust()';
 
 % % % Lithosphere.Model.Logical % % %
-Geology.Lithosphere.Model.Logical.OC = 'Load_Lithosphere_Data->Assign_OC_CC()';
-Geology.Lithosphere.Model.Logical.CC = 'Load_Lithosphere_Data->Assign_OC_CC()';
-Geology.Lithosphere.Model.Logical.Near_Field = 'Find_Near_Field_Cells()';
+Geology.Lithosphere.Model.Logical.OC = 'Assign_OC_CC()';
+Geology.Lithosphere.Model.Logical.CC = 'Assign_OC_CC()';
+Geology.Lithosphere.Model.Logical.Near_Field = 'TBD';
 
 % % % Lithosphere.Model.Abundance % % %
-template.U = 'Input'; % Unit: g/g %
-template.Th = 'Input'; % Unit: g/g %
-template.K = 'Input'; % Unit: g/g %
+template.U = 'Assign_Abundance_Layer()'; % Unit: g/g %
+template.Th = 'Assign_Abundance_Layer()'; % Unit: g/g %
+template.K = 'Assign_Abundance_Layer()'; % Unit: g/g %
 layers = {'OC', 'CC', 'UC', 'MC', 'LC', 'LM', 's1', 's2', 's3'};
 for i = 1 : length(layers)
     layer = layers{i};
@@ -60,7 +60,7 @@ clear template layers i layer;
 template.End.Abundance = 'Generate_Correlations()';
 template.End.Vp = 'Generate_Correlations()';
 template.Bivar.Abundance = 'Generate_Correlations()';
-template.Bivar.SiO2 = 'Generate_Correlations->Compute_DeepCrust()';
+template.Bivar.SiO2 = 'Generate_Correlations(), Compute_DeepCrust()';
 Geology.Lithosphere.Model.Correlation.MC.DeepCrust = template;
 Geology.Lithosphere.Model.Correlation.LC.DeepCrust = template;
 clear template;
@@ -85,32 +85,37 @@ Geology.Mantle.Proption_EM = 'Input';
 Geology.Mantle = load(fullfile(baseDir, "Input_Files", "PREM.mat"));
 Geology.Mantle.Correlation = 'Generate_Correlations()';
 % % Mantle.Abundance % %
-abundance_fields = {'U', 'Th', 'K'};
+abundance_fields = {'U', 'Th', 'K', 'U238', 'U235'};
 for ii1 = 1 : length(abundance_fields)
     field = abundance_fields{ii1};
-    Geology.Mantle.Abundance.DM.(field) = 'Compute_Mantle_Mass()';
-    Geology.Mantle.Abundance.EM.(field) = 'Compute_Mantle_Mass()';
+    Geology.Mantle.Abundance.DM.(field) = 'Compute_Mantle_Variables.m';
+    Geology.Mantle.Abundance.EM.(field) = 'Compute_Mantle_Variables.m';
+    Geology.Mantle.Abundance.Total.(field) = 'Compute_Mantle_Variables.m';
 end
 
 % % Mantle.Mass % %
-Geology.Mantle.Mass.Total.Rock = 'Compute_Mantle_Mass()';
-Geology.Mantle.Mass.Total.U = 'Compute_Mantle_Mass()';
-Geology.Mantle.Mass.Total.Th = 'Compute_Mantle_Mass()';
-mass_fields = {'Rock', 'U238', 'U235', 'U', 'Th232', 'K40'};
+Geology.Mantle.Mass.Total.Rock = 'Compute_Mantle_Variables.m';
+Geology.Mantle.Mass.Total.U = 'Compute_Mantle_Variables.m';
+Geology.Mantle.Mass.Total.U238 = 'Compute_Mantle_Variables.m';
+Geology.Mantle.Mass.Total.U235 = 'Compute_Mantle_Variables.m';
+Geology.Mantle.Mass.Total.Th = 'Compute_Mantle_Variables.m';
+mass_fields = {'Rock', 'U238', 'U235', 'U', 'Th', 'K40'};
 for ii1 = 1 : length(mass_fields)
     field = mass_fields{ii1};
-    Geology.Mantle.Mass.DM.(field) = 'Compute_Mantle_Mass()';
-    Geology.Mantle.Mass.EM.(field) = 'Compute_Mantle_Mass()';
+    Geology.Mantle.Mass.DM.(field) = 'Compute_Mantle_Variables.m';
+    Geology.Mantle.Mass.EM.(field) = 'Compute_Mantle_Variables.m';
 end
 clear abundance_fields mass_fields;
 clear ii1 field;
 
 % ~~~~~~~~~~~~~~~~~~~~ BSE ~~~~~~~~~~~~~~~~~~~~ %
 % % BSE.Mass % %
-Geology.BSE.Mass.Rock = "Compute_Mantle_Mass()";
-Geology.BSE.Mass.U = "Compute_Mantle_Mass()";
-Geology.BSE.Mass.Th = "Compute_Mantle_Mass()";
-Geology.BSE.Mass.K40 = "Compute_Mantle_Mass()";
+Geology.BSE.Mass.Rock = 'Compute_Mantle_Variables.m';
+Geology.BSE.Mass.U = 'Compute_Mantle_Variables.m';
+Geology.BSE.Mass.U238 = 'Compute_Mantle_Variables.m';
+Geology.BSE.Mass.U235 = 'Compute_Mantle_Variables.m';
+Geology.BSE.Mass.Th = 'Compute_Mantle_Variables.m';
+Geology.BSE.Mass.K = 'TBD';
 
 % % BSE.Abundance % %
 Geology.BSE.Abundance.U_Mean = 'Input';
@@ -122,5 +127,5 @@ Geology.BSE.Abundance.K = 'Compute_Abundance_BSE()';
 Geology.BSE.Correlation = 'Generate_Correlations()';
 
 % ~~~~~~~~~~~~~~~~~~~~ Other ~~~~~~~~~~~~~~~~~~~~ %
-Geology.Other.Earth.Mass = 'Compute_Mantle_Mass()';
-Geology.Other.Core.Mass = 'Compute_Mantle_Mass()';
+Geology.Other.Earth.Mass = 'Compute_Mantle_Variables.m';
+Geology.Other.Core.Mass = 'Compute_Mantle_Variables.m';

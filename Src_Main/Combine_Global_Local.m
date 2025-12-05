@@ -1,13 +1,16 @@
 % ---------- Loading Files ---------- %
 fprintf('Loading data files ...\n');
 fprintf('Global path: %s\n', global_path);
-fprintf('Local path: %s\n', local_gp_path);
+fprintf('Local Crust path: %s\n', local_crust_path);
 fprintf('Gp path: %s\n', local_gp_path)
 load(global_path);
 load(local_crust_path);
 Local_Res = load(local_gp_path);
 
-% ---------- Density and Abundance in Global Computation ---------- %
+% ---------- Random Seed ---------- %
+rng(Geology.Random_Seed);
+
+% ---------- Find the indices in Global ---------- %
 fprintf('[Combination] Start to process combination ...\n')
 unique_lon = sort(unique(Crust(:, 1)));
 unique_lat = sort(unique(Crust(:, 2)));
@@ -20,7 +23,7 @@ idx = find( global_lonlat(:,1) >= lon_min & global_lonlat(:,1) <= lon_max & ...
             global_lonlat(:,2) >= lat_min & global_lonlat(:,2) <= lat_max );
 clear unique_lon unique_lat lat_min lat_max lon_min lon_max;
 
-% ---------- Data Structure for Combination Computation ---------- %
+% ---------- Create Data Structure for Combination Computation ---------- %
 iteration = Geology.Iteration;
 len = length(idx);
 layers = {'s1', 's2', 's3', 'UC', 'MC', 'LC', 'LM'};
@@ -124,9 +127,9 @@ for iBulk = 1 : length(idx)
     inBox = Crust(:, 1) >= (LON - 0.5) & Crust(:, 1) <= (LON + 0.5) & Crust(:, 2) >= (LAT - 0.5) & Crust(:, 2) <= (LAT + 0.5);
     matched_indices = find(inBox);
     matched_cells = Crust(matched_indices, :);
-    unique_depth = sort(-unique(matched_cells(:, 3)))'; % Depth table for grids
+    unique_depth = sort(-unique(matched_cells(:, 3)))'; % Depth table for grids, 1 * NCells %
     len_grid_depth = length(unique_depth);
-    volumes = zeros(len_grid_depth, 1);
+    volumes = zeros(len_grid_depth, 1); % NCells * 1 %
     gp_factor_u238 = zeros(len_grid_depth, 1);
     gp_factor_th232 = zeros(len_grid_depth, 1);
     clear LON LAT inBox;
@@ -142,9 +145,10 @@ for iBulk = 1 : length(idx)
     clear iDepth len_grid_depth same_depth idx_same_depth;
 
     % ----- Generate Depth, Densith, and Abundance Table ---- %
+    % All in form of Iteration * Layer %
     for iLayer = 1 : len_layers
         layer = layers{iLayer};
-        Bottom_Depth_Table(:, iLayer) = Combination.(layer).Bottom_Depth(:, iBulk);
+        Bottom_Depth_Table(:, iLayer) = Combination.(layer).Bottom_Depth(:, iBulk); 
         Density_Table(:, iLayer) = Combination.(layer).Density(:, iBulk);
         Abundance_U_Table(:, iLayer) = Combination.(layer).Abundance.U(:, iBulk);
         Abundance_U238_Table(:, iLayer) = Combination.(layer).Abundance.U238(:, iBulk);
@@ -156,7 +160,7 @@ for iBulk = 1 : length(idx)
     % ----- Compute Signal Rate ----- %
     for iLayer = 1 : len_layers
         if iLayer == 1
-            mask = unique_depth <= Bottom_Depth_Table(:, iLayer);
+            mask = unique_depth <= Bottom_Depth_Table(:, iLayer); % Iteration * NCells %
         else
             mask = (unique_depth > Bottom_Depth_Table(:, iLayer-1)) & ...
                (unique_depth <= Bottom_Depth_Table(:, iLayer));
@@ -173,7 +177,7 @@ for iBulk = 1 : length(idx)
         MASS_U(:, iLayer) = MASS_U(:, iLayer) + mass_u;
         MASS_U238(:, iLayer) = MASS_U238(:, iLayer) + mass_u238;
         MASS_U235(:, iLayer) = MASS_U235(:, iLayer) + mass_u235;
-        MASS_TH(:, iLayer) = MASS_U235(:, iLayer) + mass_th;
+        MASS_TH(:, iLayer) = MASS_TH(:, iLayer) + mass_th;
 
         SIGNAL_U238(:, iLayer) = SIGNAL_U238(:, iLayer) + layer_signal_u238;
         SIGNAL_TH232(:, iLayer) = SIGNAL_TH232(:, iLayer) + layer_signal_th232;
@@ -218,5 +222,5 @@ Combination.Run_Info.Local = local_crust_path;
 Combination.Run_Info.Local_GP = local_gp_path;
 
 % ---------- Recording ---------- %
-fprintf('Start to intergrate Global and Local computation ...');
+fprintf('Start to intergrate Global and Local computation ...\n');
 run(fullfile(baseDir, "Functions", "Output", "Recording_Global_Local_Combinaiton.m"));

@@ -19,6 +19,8 @@ fprintf('Start to process: Mantle\n');
 layer_part = 'Mantle';
 
 % ~~~~~~~~~~~~~~~~~~~~ Mass ~~~~~~~~~~~~~~~~~~~~ %
+% From tbl1 in Chambat & Valette (2010), https://doi.org/10.1111/j.1365-246X.2010.04771.x
+% and tbl2 in Yoder (1995), https://doi.org/10.1029/RF001p0001
 earth_mass = Generate_Random_Normal(5.97218e24, 6e19, iteration);
 x = 1.835e24 + 9.675e22; % Unit: kg; Mass of inner and outer core %
 core_mass = Generate_Random_Normal(x, x * 0.03 ,iteration); % Unit: kg %
@@ -62,15 +64,42 @@ mantle_ath_em(mantle_ath_em < 0) = 0;
 Geology.Other.Earth.Mass = earth_mass;
 Geology.Other.Core.Mass = core_mass;
 Geology.BSE.Mass.Rock = bse_mass;
-Output.Mantle.Mass.Total.Rock = Geology.BSE.Mass.Rock - Output.Lithosphere.Mass.Total.Rock;
-Output.Mantle.Mass.DM.Rock = Output.Mantle.Mass.Total.Rock .* prop_dm;
-Output.Mantle.Mass.EM.Rock = Output.Mantle.Mass.Total.Rock .* prop_em;
+Geology.BSE.Mass.U = bse_mass .* Geology.BSE.Abundance.U;
+Geology.BSE.Mass.U238 = Geology.BSE.Mass.U .* Physics.Elements.Abundance.Mass.U238;
+Geology.BSE.Mass.U235 = Geology.BSE.Mass.U .* Physics.Elements.Abundance.Mass.U235;
+Geology.BSE.Mass.Th = bse_mass .* Geology.BSE.Abundance.Th;
 
+Geology.Mantle.Mass.Total.Rock = mantle_mass;
 Geology.Mantle.Mass.Total.U = mantle_u_mass;
+Geology.Mantle.Mass.Total.U238 = Geology.Mantle.Mass.Total.U .* Physics.Elements.Abundance.Mass.U238;
+Geology.Mantle.Mass.Total.U235 = Geology.Mantle.Mass.Total.U .* Physics.Elements.Abundance.Mass.U235;
 Geology.Mantle.Mass.Total.Th = mantle_th_mass;
+
+Geology.Mantle.Mass.DM.Rock = Geology.Mantle.Mass.Total.Rock .* prop_dm;
+Geology.Mantle.Mass.DM.U = Geology.Mantle.Mass.DM.Rock .* mantle_au_dm;
+Geology.Mantle.Mass.DM.U238 = Geology.Mantle.Mass.DM.U .* Physics.Elements.Abundance.Mass.U238;
+Geology.Mantle.Mass.DM.U235 = Geology.Mantle.Mass.DM.U .* Physics.Elements.Abundance.Mass.U235;
+Geology.Mantle.Mass.DM.Th = Geology.Mantle.Mass.DM.Rock .* mantle_ath_dm;
+
+Geology.Mantle.Mass.EM.Rock = Geology.Mantle.Mass.Total.Rock .* prop_em;
+Geology.Mantle.Mass.EM.U = Geology.Mantle.Mass.EM.Rock .* mantle_au_em;
+Geology.Mantle.Mass.EM.U238 = Geology.Mantle.Mass.EM.U .* Physics.Elements.Abundance.Mass.U238;
+Geology.Mantle.Mass.EM.U235 = Geology.Mantle.Mass.EM.U .* Physics.Elements.Abundance.Mass.U235;
+Geology.Mantle.Mass.EM.Th = Geology.Mantle.Mass.EM.Rock .* mantle_ath_em;
+
+Geology.Mantle.Abundance.Total.U = mantle_u_mass ./ mantle_mass;
+Geology.Mantle.Abundance.Total.U238 = mantle_u_mass .* Physics.Elements.Abundance.Mass.U238 ./ mantle_mass;
+Geology.Mantle.Abundance.Total.U235 = mantle_u_mass .* Physics.Elements.Abundance.Mass.U235 ./ mantle_mass;
+Geology.Mantle.Abundance.Total.Th = mantle_th_mass ./ mantle_mass;
+
 Geology.Mantle.Abundance.DM.U = mantle_au_dm;
+Geology.Mantle.Abundance.DM.U238 = mantle_au_dm .* Physics.Elements.Abundance.Mass.U238;
+Geology.Mantle.Abundance.DM.U235 = mantle_au_dm .* Physics.Elements.Abundance.Mass.U235;
 Geology.Mantle.Abundance.DM.Th = mantle_ath_dm;
+
 Geology.Mantle.Abundance.EM.U = mantle_au_em;
+Geology.Mantle.Abundance.EM.U238 = mantle_au_em .* Physics.Elements.Abundance.Mass.U238;
+Geology.Mantle.Abundance.EM.U235 = mantle_au_em .* Physics.Elements.Abundance.Mass.U235;
 Geology.Mantle.Abundance.EM.Th = mantle_ath_em;
 
 % % Clear % %

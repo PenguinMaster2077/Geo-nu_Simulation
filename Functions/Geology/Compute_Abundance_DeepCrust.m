@@ -27,11 +27,10 @@ function Geology = Compute_Abundance_DeepCrust(Physics, Geology)
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
 
 % % ~~~~~~~~~~~~~~~~~~~~ Temp Variables ~~~~~~~~~~~~~~~~~~~~ % %
-ppm = 1e-6; % 1 ppm = 1 μg/g = 1e-6 g/g %
-K2O = Physics.Constants.Others.K_K2O; % K在K2O中的质量分数, Unit: 1 %
-K40 = Physics.Elements.Abundance.Mass.K40; % K40的质量分数, Unit: 1 %
-% wt = 0.01 * K2O * K40; % K2O分布的变量单位是wt% (mass fraction)，所以要乘0.01
-wt = 0.01 * K2O; % K单位是wt% (mass fraction, 1 wt% = 1e4 ppm)，这里要转变成g/g，所以要乘0.01 %
+ppm = 1e-6;
+K2O = Physics.Constants.Others.K_K2O; % Mass fraction of K in K2); Unit: 1 %
+K40 = Physics.Elements.Abundance.Mass.K40; % Mass fraction of K40; Unit: 1 %
+wt = 0.01 * K2O; % Unit of K is wt% (mass fraction, 1 wt% = 1e4 ppm) %
 iteration = Geology.Iteration;
 
 % % ~~~~~~~~~~~~~~~~~~~~ Huang Method ~~~~~~~~~~~~~~~~~~~~ % %

@@ -37,13 +37,14 @@ m32 = Physics.Oscillation.Parameters.delta_m32_square;
 array_for_signal = {Sig_Res_U238, Sig_Res_Th232, energy, p1, p2, p3, m21, m31, m32};
 
 VOLUME = zeros(len_grids, 1);
+DISTANCE = zeros(len_grids, 1);
 GP_U238 = zeros(len_grids, 1);
 GP_TH232 = zeros(len_grids, 1);
 
 % ----- Compute GP Factor ----- %
 for iGrid = 1 : len_grids
     array_for_volume = {lonlat(iGrid, 1), lonlat(iGrid, 2), depth(iGrid, 1), half_thick(iGrid, 1), surface_radius, Cal.Longitude_Interval, Cal.Latitude_Interval};
-    [VOLUME(iGrid, 1), GP_U238(iGrid, 1), GP_TH232(iGrid, 1)] = Minimal_Geonu_Calculator_GP(iGrid, detector, array_for_volume, array_for_signal);
+    [DISTANCE(iGrid, 1), VOLUME(iGrid, 1), GP_U238(iGrid, 1), GP_TH232(iGrid, 1)] = Minimal_Geonu_Calculator_GP(iGrid, detector, array_for_volume, array_for_signal);
 end
 clear iGrid surface_radius detector Sig_Res_U238 Sig_Res_Th232;
 clear energy p1 p2 p3 m21 m31 m32 array_for_signal array_for_volume;

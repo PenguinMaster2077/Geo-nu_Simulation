@@ -55,7 +55,7 @@ Physics.Elements.Spectrum.Energy.Length = Length;
 for ii1 = 1:Length
     energy = Physics.Elements.Spectrum.Energy.Bin_Centers(ii1, 1) + 0.5 *binwidth;
     index = find(Spectrum.(name)(:, 2) > energy, 1, 'first') - 1;
-    last_index = index - binwidth * 1000 + 1;
+    last_index = index - binwidth * 1000 + 1; % Only be capable to 0.1 MeV binwidth.
     if last_index <= 0
         last_index = 1;
     end

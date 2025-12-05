@@ -35,7 +35,7 @@ if strcmp(model_name, 'Crust1')
     len_types = length(OC_types);
     % % Find OC % %
     for i = 1: len
-        geophys_type_value = GeoPhys.type(i, 1);
+        geophys_type_value = GeoPhys.type(i, 3);
         for j = 1: len_types
             if geophys_type_value == OC_types(j)
                 Logical.OC(i) = true;

@@ -50,16 +50,19 @@ elseif strcmp(layer_part, 'Mantle')
     % ~~~~~~~~~~~~~~~~~~~~ Each Layer ~~~~~~~~~~~~~~~~~~~~ %
     aU238 = Physics.Elements.Abundance.Mass.U238;
     aU235 = Physics.Elements.Abundance.Mass.U235;
+    Output.Mantle.Mass.DM.Rock = Geology.Mantle.Mass.DM.Rock;
     Output.Mantle.Mass.DM.U = sum(MASS_U_DM, 1)';
     Output.Mantle.Mass.DM.U238 = sum(MASS_U_DM .* aU238, 1)';
     Output.Mantle.Mass.DM.U235 = sum(MASS_U_DM .* aU235, 1)';
     Output.Mantle.Mass.DM.Th = sum(MASS_TH_DM, 1)';
 
+    Output.Mantle.Mass.EM.Rock = Geology.Mantle.Mass.EM.Rock;
     Output.Mantle.Mass.EM.U = sum(MASS_U_EM, 1)';
     Output.Mantle.Mass.EM.U238 = sum(MASS_U_EM .* aU238, 1)';
     Output.Mantle.Mass.EM.U235 = sum(MASS_U_EM .* aU235, 1)';
     Output.Mantle.Mass.EM.Th = sum(MASS_TH_EM, 1)';
-
+    
+    Output.Mantle.Mass.Total.Rock = Geology.Mantle.Mass.Total.Rock;
     Output.Mantle.Mass.Total.U = Output.Mantle.Mass.DM.U + Output.Mantle.Mass.EM.U;
     Output.Mantle.Mass.Total.U238 = Output.Mantle.Mass.DM.U238 + Output.Mantle.Mass.EM.U238;
     Output.Mantle.Mass.Total.U235 = Output.Mantle.Mass.DM.U235 + Output.Mantle.Mass.EM.U235;

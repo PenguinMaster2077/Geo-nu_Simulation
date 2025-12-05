@@ -57,10 +57,10 @@ Physics.Oscillation.Coefficients.p3 = 'Load_Oscillation_Parameters()';
 
 % ~~~~~~~~~~~~~~~~~~~~ Elements ~~~~~~~~~~~~~~~~~~~~ %
 % % Elements.Halflife % %
-% % % From Wiki % % %
-Physics.Elements.Halflife.U238 = 4.468e9 * 365 * 86400; % Unit: s %
-Physics.Elements.Halflife.U235 = 7.04e8 * 365 * 86400; % Unit: s %
-Physics.Elements.Halflife.Th232 = 1.405e10 * 365 * 86400; % Unit: s %
+% % % From 10.1088/1674-1137/abddae % % %
+Physics.Elements.Halflife.U238 = 4.463e9 * 365 * 86400; % Unit: s %
+Physics.Elements.Halflife.U235 = 0.704e9 * 365 * 86400; % Unit: s %
+Physics.Elements.Halflife.Th232 = 14.0e9 * 365 * 86400; % Unit: s %
 Physics.Elements.Halflife.K40 = 1.248e9 * 365 * 86400; % Unit: s %
 
 % % Elements.Decay_Constant % %
@@ -70,29 +70,28 @@ Physics.Elements.Decay_Constant.Th232 = log(2) / Physics.Elements.Halflife.Th232
 Physics.Elements.Decay_Constant.K40 = log(2) / Physics.Elements.Halflife.K40; % Unit: 1/s %
 
 % % Elements.Mass % %
-% % % From Wiki % % %
-Physics.Elements.Mass.U238 = 238.05078826; % Unit: amu %
-Physics.Elements.Mass.U235 = 235.0439299; % Unit: amu %
+% % % From 10.1088/1674-1137/abddaf % % %
+Physics.Elements.Mass.U238 = 238.0507869; % Unit: amu %
+Physics.Elements.Mass.U235 = 235.0439281; % Unit: amu %
 Physics.Elements.Mass.Th232 = 232.0380536; % Unit: amu %
-Physics.Elements.Mass.K39 = 38.9637064848; % Unit: amu %
-Physics.Elements.Mass.K40 = 39.96399848165; % Unit: amu %
-Physics.Elements.Mass.K41 = 40.9618252561; % Unit: amu %
+Physics.Elements.Mass.K39 = 38.963706485; % Unit: amu %
+Physics.Elements.Mass.K40 = 39.96399817; % Unit: amu %
+Physics.Elements.Mass.K41 = 40.961825256; % Unit: amu %
 
 % % Elements.Abundance % %
 % % % Abundance.Mole % % %
-% % % % From Wiki % % % %
 Physics.Elements.Abundance.Mole.U238 = 0.993;
 Physics.Elements.Abundance.Mole.U235 = 1 - Physics.Elements.Abundance.Mole.U238;
 Physics.Elements.Abundance.Mole.Th232 = 1;
-Physics.Elements.Abundance.Mole.K39 = 0.01 * 93.2581;
+Physics.Elements.Abundance.Mole.K39 = 0.01 * 93.258144;
 Physics.Elements.Abundance.Mole.K40 = 0.01 * 0.0117;
-Physics.Elements.Abundance.Mole.K41 = 0.01 * 6.7302;
+Physics.Elements.Abundance.Mole.K41 = 0.01 * 6.730156;
 
 % % % Abundance.Mass % % %
 Physics.Elements.Abundance.Mass.U238 = Compute_Relative_Abundance_Mass(Physics, 'U238');
 Physics.Elements.Abundance.Mass.U235 = Compute_Relative_Abundance_Mass(Physics, 'U235');
 Physics.Elements.Abundance.Mass.Th232 = Compute_Relative_Abundance_Mass(Physics, 'Th232');
-Physics.Elements.Abundance.Mass.K40 = Compute_Relative_Abundance_Mass(Physics, 'K40'); % 如果只考虑K39和K40，则此值为0.00012 %
+Physics.Elements.Abundance.Mass.K40 = Compute_Relative_Abundance_Mass(Physics, 'K40');
 
 % % Elements.Spectrum % %
 % % % Spectrum.Energy % % %

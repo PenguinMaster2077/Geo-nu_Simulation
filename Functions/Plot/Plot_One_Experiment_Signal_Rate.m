@@ -11,7 +11,16 @@ sig_mantle = sig_mantle(sig_mantle ~= 0); % Drop 0 values %
 sig_total = sig_total(sig_total ~= 0); % Drop 0 values %
 
 % % ~~~~~~~~~~~~~~~~~~~~ Lithosphere ~~~~~~~~~~~~~~~~~~~~ % %
-pd = fitdist(sig_lith(:, 1), 'Normal');
+data = 0 .* sig_lith;
+res_mean = 0;
+perror = 0;
+nerror = 0;
+if strcmp(Plot.Signal_Fit, 'Normal') || strcmp(Plot.Signal_Fit, 'Mean&Deviation')
+    data = sig_lith(:, 1);
+elseif strcmp(Plot.Signal_Fit, 'Log-Normal')
+    data = log(sig_lith(:, 1));
+end
+pd = fitdist(data, 'Normal');
 mean_value = pd.mu;
 sigma = pd.sigma;
 figure;
@@ -22,7 +31,20 @@ ylabel('Entries');
 xlim([0, 100]);
 xticks(0:5:100);
 grid on;
-parameter_tex = sprintf('Geonu Signal\n %.2f_{-%.2f}^{+%.2f} TNU', mean_value, sigma, sigma);
+if strcmp(Plot.Signal_Fit, 'Normal')
+    res_mean = mean_value;
+    perror = sigma;
+    nerror = sigma;
+elseif strcmp(Plot.Signal_Fit, 'Log-Normal')
+    res_mean = exp(mean_value);
+    perror = exp(mean_value + sigma) - exp(mean_value);
+    nerror = exp(mean_value) - exp(mean_value - sigma);
+elseif strcmp(Plot.Signal_Fit, 'Mean&Deviation')
+    res_mean = mean(data);
+    perror = std(data);
+    nerror = std(data);
+end
+parameter_tex = sprintf('Geonu Signal\n %.2f_{-%.2f}^{+%.2f} TNU', res_mean, perror, nerror);
 y_lim = ylim;
 x_pos = 60;
 y_pos = y_lim(2) * 0.8;
@@ -35,7 +57,12 @@ if Plot.Save
 end
 
 % % ~~~~~~~~~~~~~~~~~~~~ Mantle ~~~~~~~~~~~~~~~~~~~~ % %
-pd = fitdist(sig_mantle(:, 1), 'Normal');
+if strcmp(Plot.Signal_Fit, 'Normal') || strcmp(Plot.Signal_Fit, 'Mean&Deviation')
+    data = sig_mantle(:, 1);
+elseif strcmp(Plot.Signal_Fit, 'Log-Normal')
+    data = log(sig_mantle(:, 1));
+end
+pd = fitdist(data, 'Normal');
 mean_value = pd.mu;
 sigma = pd.sigma;
 figure;
@@ -46,7 +73,20 @@ ylabel('Entries');
 xlim([0, 100]);
 xticks(0:5:100);
 grid on;
-parameter_tex = sprintf('Geonu Signal\n %.2f_{-%.2f}^{+%.2f} TNU', mean_value, sigma, sigma);
+if strcmp(Plot.Signal_Fit, 'Normal')
+    res_mean = mean_value;
+    perror = sigma;
+    nerror = sigma;
+elseif strcmp(Plot.Signal_Fit, 'Log-Normal')
+    res_mean = exp(mean_value);
+    perror = exp(mean_value + sigma) - exp(mean_value);
+    nerror = exp(mean_value) - exp(mean_value - sigma);
+elseif strcmp(Plot.Signal_Fit, 'Mean&Deviation')
+    res_mean = mean(data);
+    perror = std(data);
+    nerror = std(data);
+end
+parameter_tex = sprintf('Geonu Signal\n %.2f_{-%.2f}^{+%.2f} TNU', res_mean, perror, nerror);
 y_lim = ylim;
 x_pos = 60;
 y_pos = y_lim(2) * 0.8;
@@ -59,7 +99,12 @@ if Plot.Save
 end
 
 % % ~~~~~~~~~~~~~~~~~~~~ Total ~~~~~~~~~~~~~~~~~~~~ % %
-pd = fitdist(sig_total(:, 1), 'Normal');
+if strcmp(Plot.Signal_Fit, 'Normal') || strcmp(Plot.Signal_Fit, 'Mean&Deviation')
+    data = sig_total(:, 1);
+elseif strcmp(Plot.Signal_Fit, 'Log-Normal')
+    data = log(sig_total(:, 1));
+end
+pd = fitdist(data, 'Normal');
 mean_value = pd.mu;
 sigma = pd.sigma;
 figure;
@@ -70,7 +115,20 @@ ylabel('Entries');
 xlim([0, 100]);
 xticks(0:5:100);
 grid on;
-parameter_tex = sprintf('Geonu Signal\n %.2f_{-%.2f}^{+%.2f} TNU', mean_value, sigma, sigma);
+if strcmp(Plot.Signal_Fit, 'Normal')
+    res_mean = mean_value;
+    perror = sigma;
+    nerror = sigma;
+elseif strcmp(Plot.Signal_Fit, 'Log-Normal')
+    res_mean = exp(mean_value);
+    perror = exp(mean_value + sigma) - exp(mean_value);
+    nerror = exp(mean_value) - exp(mean_value - sigma);
+elseif strcmp(Plot.Signal_Fit, 'Mean&Deviation')
+    res_mean = mean(data);
+    perror = std(data);
+    nerror = std(data);
+end
+parameter_tex = sprintf('Geonu Signal\n %.2f_{-%.2f}^{+%.2f} TNU', res_mean, perror, nerror);
 y_lim = ylim;
 x_pos = 60;
 y_pos = y_lim(2) * 0.8;
@@ -84,7 +142,12 @@ end
 
 % % ~~~~~~~~~~~~~~~~~~~~ 238U ~~~~~~~~~~~~~~~~~~~~ % %
 u238 = Res.Output.Lithosphere.Geonu_Signal.Total.U238 + Res.Output.Mantle.Geonu_Signal.Total.U238;
-pd = fitdist(u238(:, 1), 'Normal');
+if strcmp(Plot.Signal_Fit, 'Normal') || strcmp(Plot.Signal_Fit, 'Mean&Deviation')
+    data = u238(:, 1);
+elseif strcmp(Plot.Signal_Fit, 'Log-Normal')
+    data = log(u238(:, 1));
+end
+pd = fitdist(data, 'Normal');
 mean_value = pd.mu;
 sigma = pd.sigma;
 figure;
@@ -95,7 +158,20 @@ ylabel('Entries');
 xlim([0, 100]);
 xticks(0:5:100);
 grid on;
-parameter_tex = sprintf('Geonu Signal\n %.2f_{-%.2f}^{+%.2f} TNU', mean_value, sigma, sigma);
+if strcmp(Plot.Signal_Fit, 'Normal')
+    res_mean = mean_value;
+    perror = sigma;
+    nerror = sigma;
+elseif strcmp(Plot.Signal_Fit, 'Log-Normal')
+    res_mean = exp(mean_value);
+    perror = exp(mean_value + sigma) - exp(mean_value);
+    nerror = exp(mean_value) - exp(mean_value - sigma);
+elseif strcmp(Plot.Signal_Fit, 'Mean&Deviation')
+    res_mean = mean(data);
+    perror = std(data);
+    nerror = std(data);
+end
+parameter_tex = sprintf('Geonu Signal\n %.2f_{-%.2f}^{+%.2f} TNU', res_mean, perror, nerror);
 y_lim = ylim;
 x_pos = 60;
 y_pos = y_lim(2) * 0.8;
@@ -108,7 +184,12 @@ end
 
 % % ~~~~~~~~~~~~~~~~~~~~ 232Th ~~~~~~~~~~~~~~~~~~~~ % %
 th232 = Res.Output.Lithosphere.Geonu_Signal.Total.Th232 + Res.Output.Mantle.Geonu_Signal.Total.Th232;
-pd = fitdist(th232(:, 1), 'Normal');
+if strcmp(Plot.Signal_Fit, 'Normal') || strcmp(Plot.Signal_Fit, 'Mean&Deviation')
+    data = th232(:, 1);
+elseif strcmp(Plot.Signal_Fit, 'Log-Normal')
+    data = log(th232(:, 1));
+end
+pd = fitdist(data, 'Normal');
 mean_value = pd.mu;
 sigma = pd.sigma;
 figure;
@@ -119,7 +200,20 @@ ylabel('Entries');
 xlim([0, 100]);
 xticks(0:5:100);
 grid on;
-parameter_tex = sprintf('Geonu Signal\n %.2f_{-%.2f}^{+%.2f} TNU', mean_value, sigma, sigma);
+if strcmp(Plot.Signal_Fit, 'Normal')
+    res_mean = mean_value;
+    perror = sigma;
+    nerror = sigma;
+elseif strcmp(Plot.Signal_Fit, 'Log-Normal')
+    res_mean = exp(mean_value);
+    perror = exp(mean_value + sigma) - exp(mean_value);
+    nerror = exp(mean_value) - exp(mean_value - sigma);
+elseif strcmp(Plot.Signal_Fit, 'Mean&Deviation')
+    res_mean = mean(data);
+    perror = std(data);
+    nerror = std(data);
+end
+parameter_tex = sprintf('Geonu Signal\n %.2f_{-%.2f}^{+%.2f} TNU', res_mean, perror, nerror);
 y_lim = ylim;
 x_pos = 60;
 y_pos = y_lim(2) * 0.8;

@@ -12,40 +12,34 @@
 %
 % Creation Date   : 2025-03-26
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Useful summary at Sramek et al. (2016), https://doi.org/10.1038/srep33034 %
 
 % % % ~~~~~~~~~~~~~~~~~~ Abundance ~~~~~~~~~~~~~~~~~~ % % %
-% % % % From Table 8 in https://www.sciencedirect.com/science/article/abs/pii/B9780080959757003156?via%3Dihub % % % %
-% % % % From Table 3 in https://agupubs.onlinelibrary.wiley.com/doi/10.1002/ggge.20129 % % % %
-% % % % Input the abundances of U, Th, and K. 
-% % % % Note that K refers to the total potassium abundance, not just K-40. % % % %
-% % % % Uncertainty: 30% % % % %
-OC_Abundance_U = [0.07, 0.021, 0.021] * 1e-6; % Unit: g/g %
-OC_Abundance_Th = [0.210, 0.063, 0.063] * 1e-6; % Unit: g/g %
-OC_Abundance_K = [0.0716, 0.0215, 0.0215] * 1e-2; % Unit: g/g %
+% From tbl3 in Huang et al. (2013), https://doi.org/10.1002/ggge.20129
+% and tbl8 in White & Klein (2014), https://doi.org/10.1038/srep33034 %
+% % Note that K refers to the total potassium abundance, not K-40. % %
+OC_Abundance_U = [0.07, 0.021, 0.021] * 1e-6; % 30%; Unit: g/g %
+OC_Abundance_Th = [0.210, 0.063, 0.063] * 1e-6; % 30%; Unit: g/g %
+OC_Abundance_K = [0.07, 0.021, 0.021] * 1e-2; % 30%; Unit: g/g %
 
-% % % % From Table 3 in https://agupubs.onlinelibrary.wiley.com/doi/10.1002/ggge.20129 % % % %
-% % % % Input Abundance of CC in UC Layer % % % %
-UC_CC_Abundance_U = [2.7, 0.6, 0.6] * 1e-6; % Unit: g/g %
-UC_CC_Abundance_Th =[10.5, 1.0, 1.0] * 1e-6; % Unit: g/g %
-UC_CC_Abundance_K = [2.32, 0.19, 0.19] * 1e-2; % Unit: g/g %
+% From tbl3 in Rudnick & Gao (2014), https://doi.org/10.1016/B978-0-08-095975-7.00301-6 %
+% Input Abundance of CC in UC Layer %
+UC_CC_Abundance_U = [2.7, 0.6, 0.6] * 1e-6; % 21%; Unit: g/g %
+UC_CC_Abundance_Th =[10.5, 1.05, 1.05] * 1e-6; % 10%; Unit: g/g %
+UC_CC_Abundance_K = [2.32, 0.19, 0.19] * 1e-2; % 8%; Unit: g/g %
 
-% % % % From Table 3 in https://agupubs.onlinelibrary.wiley.com/doi/10.1002/ggge.20129 % % % %
-% % % % Input Abundance of CC in LM Layer % % % %
+% From tbl3 in Huang et al. (2013), https://doi.org/10.1002/ggge.20129 %
+% Input Abundance of CC in LM Layer %
 LM_CC_Abundance_U =  [0.033, 0.049, 0.020] * 1e-6; % Unit: g/g %
 LM_CC_Abundance_Th = [0.150, 0.277, 0.097] * 1e-6; % Unit: g/g %
 LM_CC_Abundance_K = [0.0315, 0.04316, 0.01826] * 1e-2; % Unit: g/g %
 
-% % % % From Table 3 in https://agupubs.onlinelibrary.wiley.com/doi/10.1002/ggge.20129 % % % %
-% % % % Input Abundance of CC in Sediment Layer % % % %
-Sed_Abundance_U = [1.73, 0.09, 0.09] * 1e-6; % Unit: g/g %
-Sed_Abundance_Th = [8.10, 0.59, 0.59] * 1e-6; % Unit: g/g %
-
-% % % % From in Table.2 https://www.sciencedirect.com/science/article/abs/pii/B9780080959757003193?via%3Dihub % % % %
-% % % % The paper reports K₂O abundance instead of elemental K,
-% % % % so a conversion factor (~0.83) must be applied for K mass fraction 
-% % % % in K₂O; alternatively, you can directly input the K abundance. % % % %
-
-Sed_Abundance_K = [2.21, 0.14, 0.14] * Physics.Constants.Others.K_K2O * 1e-2; % Unit: g/g%
+% From tbl3 in Huang et al. (2013), https://doi.org/10.1002/ggge.20129 
+% and tbl2 in T.Plank (2014), https://doi.org/10.1016/B978-0-08-095975-7.00319-3 %
+% Input Abundance of CC in Sediment Layer %
+Sed_Abundance_U = [1.73, 0.09, 0.09] * 1e-6; % 5%; Unit: g/g %
+Sed_Abundance_Th = [8.10, 0.59, 0.59] * 1e-6; % 7%; Unit: g/g %
+Sed_Abundance_K = [2.21, 0.14, 0.14] * Physics.Constants.Others.K_K2O * 1e-2; % 7%; Unit: g/g%
 
 % % % ~~~~~~~~~~~~~~~~~~ Asign Abundance ~~~~~~~~~~~~~~~~~~ % % %
 Geology = Load_Lithosphere_Data(Geology);

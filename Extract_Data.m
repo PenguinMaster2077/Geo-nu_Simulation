@@ -1,3 +1,4 @@
+% This code is genereated for extracting the dataset from Huang et al. (2014) %
 % -------------------- Crust -------------------- %
 disp("Loading UC ...");
 file_path = "E:\Data\Geology\H14\Upper_crust\uc_xyzg_GEO.txt";

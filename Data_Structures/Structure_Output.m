@@ -25,7 +25,7 @@ for ii1 = 1 : length(Interests_fields)
         layer = Layers{ii2};
             for ii3 = 1 : length(Items_fields)
                 item = Items_fields{ii3};
-                Output.Lithosphere.(interest).(layer).(item) = 'Record';
+                Output.Lithosphere.(interest).(layer).(item) = 'Recording_Signal_Rate.m';
             end % ii3 for item
     end % ii2 for layers
 end % ii1 for Interests
@@ -39,7 +39,7 @@ for ii1 = 1 : length(Interests_fields)
     layer = Layers{ii2};
         for ii3 = 1 : length(Items_fields)
             item = Items_fields{ii3};
-            Output.Lithosphere.(interest).(layer).(item) = 'Record';
+            Output.Lithosphere.(interest).(layer).(item) = 'Recording_Mass.m';
         end
     end
 end
@@ -53,7 +53,7 @@ for ii1 = 1 : length(Interests_fields)
     layer = Layers{ii2};
         for ii3 = 1 : length(Items_fields)
             item = Items_fields{ii3};
-            Output.Lithosphere.(interest).(layer).(item) = 'Record';
+            Output.Lithosphere.(interest).(layer).(item) = 'Recording_Abundance.m';
         end
     end
 end
@@ -87,7 +87,7 @@ for ii1 = 1 : length(Interests_fields)
         layer = Layers{ii2};
         for ii3 = 1 : length(Items_fields)
             item = Items_fields{ii3};
-            Output.Mantle.(interest).(layer).(item) = 'Record';
+            Output.Mantle.(interest).(layer).(item) = 'Recording_Signal_Rate.m';
         end
     end
 end
@@ -102,7 +102,7 @@ for ii1 = 1 : length(Interests_fields)
         layer = Layers{ii2};
         for ii3 = 1 : length(Items_fields)
             item = Items_fields{ii3};
-            Output.Mantle.(interest).(layer).(item) = 'Record';
+            Output.Mantle.(interest).(layer).(item) = 'Recording_Mass.m';
         end
     end
 end
@@ -117,7 +117,7 @@ for ii1 = 1 : length(Interests_fields)
         layer = Layers{ii2};
         for ii3 = 1 : length(Items_fields)
             item = Items_fields{ii3};
-            Output.Mantle.(interest).(layer).(item) = 'Record';
+            Output.Mantle.(interest).(layer).(item) = 'Recording_Abundance.m';
         end
     end
 end

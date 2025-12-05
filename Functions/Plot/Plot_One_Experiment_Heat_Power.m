@@ -20,16 +20,18 @@ Res = load(file_path);
 [~, name, ~] = fileparts(file_path);
 
 % ~~~~~~~~~~~~~~~~~~~~ Radiogenic Power ~~~~~~~~~~~~~~~~~~~~ %
-heat_lith = Res.Output.Lithosphere.Heat_Power.Total.Total .* 1e-12; % Unit: TW %
-heat_mantle = Res.Output.Mantle.Heat_Power.Total.Total .* 1e-12; % Unit: TW %
+heat_lith = Res.Output.Lithosphere.Heat_Power.Total.Total; % Unit: TW %
+heat_mantle = Res.Output.Mantle.Heat_Power.Total.Total; % Unit: TW %
 heat_total = heat_lith + heat_mantle; % Unit: TW %
 heat_mantle = heat_mantle(heat_mantle ~= 0);  % Drop 0 values %
 heat_total = heat_total(heat_total ~= 0); % Drop 0 values %
 
 % % ~~~~~~~~~~~~~~~~~~~~ Lithosphere ~~~~~~~~~~~~~~~~~~~~ % %
-pd = fitdist(heat_lith(:, 1), 'Normal');
-mean_value = pd.mu;
-sigma = pd.sigma;
+data = log(heat_lith(:, 1));
+pd = fitdist(data, 'Normal');
+mean_value = pd.mu .* 1e-12;
+sigma = pd.sigma .* 1e-12;
+disp([mean_value, sigma]);
 figure;
 histogram(heat_lith, 'BinWidth', 0.5);
 title("Radiogenic Power Distribution for Lithosphere");
