@@ -22,8 +22,16 @@ if strcmp(layer_part, 'Lithosphere')
     Output.Lithosphere.Mass.(name_layer).U238 = sum(MASS_U .* aU238, 1)';
     Output.Lithosphere.Mass.(name_layer).U235 = sum(MASS_U .* aU235, 1)';
     Output.Lithosphere.Mass.(name_layer).Th = sum(MASS_TH, 1)';
-    clear aU238 aU235;
 
+    % ~~~~~~~~~~~~~~~~~~~~ Each Layer: Near-Field ~~~~~~~~~~~~~~~~~~~~ %
+    near_index = Geology.Near_Field.Indices;
+    Output.Lithosphere.Mass.(name_layer).Near_Field.Rock = sum(MASS_ROCK(near_index, :), 1)';
+    Output.Lithosphere.Mass.(name_layer).Near_Field.U = sum(MASS_U(near_index, :), 1)';
+    Output.Lithosphere.Mass.(name_layer).Near_Field.U238 = sum(MASS_U(near_index, :), 1)' .* aU238;
+    Output.Lithosphere.Mass.(name_layer).Near_Field.U235 = sum(MASS_U(near_index, :), 1)' .* aU235;
+    Output.Lithosphere.Mass.(name_layer).Near_Field.Th = sum(MASS_TH(near_index, :), 1)';
+    
+    clear aU238 aU235;
     % ~~~~~~~~~~~~~~~~~~~~ LM and Total ~~~~~~~~~~~~~~~~~~~~ %
     if strcmp(name_layer, 'LM')
         layers = {'s1', 's2', 's3', 'UC', 'MC', 'LC', 'LM'};
@@ -33,6 +41,12 @@ if strcmp(layer_part, 'Lithosphere')
         Output.Lithosphere.Mass.Total.U238 = template;
         Output.Lithosphere.Mass.Total.U235 = template;
         Output.Lithosphere.Mass.Total.Th = template;
+
+        Output.Lithosphere.Mass.Total.Near_Field.Rock = template;
+        Output.Lithosphere.Mass.Total.Near_Field.U = template;
+        Output.Lithosphere.Mass.Total.Near_Field.U238 = template;
+        Output.Lithosphere.Mass.Total.Near_Field.U235 = template;
+        Output.Lithosphere.Mass.Total.Near_Field.Th = template;
         % % Add up all layers % %
         for ii1 = 1 : length(layers)
             layer = layers{ii1};
@@ -41,8 +55,14 @@ if strcmp(layer_part, 'Lithosphere')
             Output.Lithosphere.Mass.Total.U238 = Output.Lithosphere.Mass.Total.U238 + Output.Lithosphere.Mass.(layer).U238;
             Output.Lithosphere.Mass.Total.U235 = Output.Lithosphere.Mass.Total.U235 + Output.Lithosphere.Mass.(layer).U235;
             Output.Lithosphere.Mass.Total.Th = Output.Lithosphere.Mass.Total.Th + Output.Lithosphere.Mass.(layer).Th;
+            % ~~~~~~~~~~~~~~~~~~~~ Near-Field ~~~~~~~~~~~~~~~~~~~~ %
+            Output.Lithosphere.Mass.Total.Near_Field.Rock = Output.Lithosphere.Mass.Total.Near_Field.Rock + Output.Lithosphere.Mass.(layer).Near_Field.Rock;
+            Output.Lithosphere.Mass.Total.Near_Field.U = Output.Lithosphere.Mass.Total.Near_Field.U + Output.Lithosphere.Mass.(layer).Near_Field.U;
+            Output.Lithosphere.Mass.Total.Near_Field.U238 = Output.Lithosphere.Mass.Total.Near_Field.U238 + Output.Lithosphere.Mass.(layer).Near_Field.U238;
+            Output.Lithosphere.Mass.Total.Near_Field.U235 = Output.Lithosphere.Mass.Total.Near_Field.U235 + Output.Lithosphere.Mass.(layer).Near_Field.U235;
+            Output.Lithosphere.Mass.Total.Near_Field.Th = Output.Lithosphere.Mass.Total.Near_Field.Th + Output.Lithosphere.Mass.(layer).Near_Field.Th;
         end
-        clear template layers layer;
+        clear template layers layer near_index;
     end
 elseif strcmp(layer_part, 'Mantle')
     fprintf('Mantle: Recording Mass\n');

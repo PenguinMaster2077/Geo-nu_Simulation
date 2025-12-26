@@ -18,6 +18,12 @@ if strcmp(layer_part, 'Lithosphere')
     Output.Lithosphere.Geonu_Signal.(name_layer).Total = sum(SIGNAL_U + SIGNAL_TH, 1)';
     Output.Lithosphere.Geonu_Signal.(name_layer).U238 = sum(SIGNAL_U, 1)';
     Output.Lithosphere.Geonu_Signal.(name_layer).Th232 = sum(SIGNAL_TH, 1)';
+
+    % ~~~~~~~~~~~~~~~~~~~~ Each Layer: Near-Field ~~~~~~~~~~~~~~~~~~~~ %
+    near_index = Geology.Near_Field.Indices;
+    Output.Lithosphere.Geonu_Signal.(name_layer).Near_Field.Total = sum(SIGNAL_U(near_index, :) + SIGNAL_TH(near_index, :), 1)';
+    Output.Lithosphere.Geonu_Signal.(name_layer).Near_Field.U238 = sum(SIGNAL_U(near_index, :), 1)';
+    Output.Lithosphere.Geonu_Signal.(name_layer).Near_Field.Th232 = sum(SIGNAL_TH(near_index, :), 1)';
     
     % ~~~~~~~~~~~~~~~~~~~~ LM and Total ~~~~~~~~~~~~~~~~~~~~ %
     if strcmp(name_layer, 'LM')
@@ -26,14 +32,22 @@ if strcmp(layer_part, 'Lithosphere')
         Output.Lithosphere.Geonu_Signal.Total.Total = template;
         Output.Lithosphere.Geonu_Signal.Total.U238 = template;
         Output.Lithosphere.Geonu_Signal.Total.Th232 = template;
+
+        Output.Lithosphere.Geonu_Signal.Total.Near_Field.Total = template;
+        Output.Lithosphere.Geonu_Signal.Total.Near_Field.U238 = template;
+        Output.Lithosphere.Geonu_Signal.Total.Near_Field.Th232 = template;
         % % Add up all layers % %
         for ii1 = 1 : length(layers)
             layer = layers{ii1};       
             Output.Lithosphere.Geonu_Signal.Total.U238 = Output.Lithosphere.Geonu_Signal.Total.U238 + Output.Lithosphere.Geonu_Signal.(layer).U238;
             Output.Lithosphere.Geonu_Signal.Total.Th232 = Output.Lithosphere.Geonu_Signal.Total.Th232 + Output.Lithosphere.Geonu_Signal.(layer).Th232;
+
+            Output.Lithosphere.Geonu_Signal.Total.Near_Field.U238 = Output.Lithosphere.Geonu_Signal.Total.Near_Field.U238 + Output.Lithosphere.Geonu_Signal.(layer).Near_Field.U238;
+            Output.Lithosphere.Geonu_Signal.Total.Near_Field.Th232 = Output.Lithosphere.Geonu_Signal.Total.Near_Field.Th232 + Output.Lithosphere.Geonu_Signal.(layer).Near_Field.Th232;
         end
         Output.Lithosphere.Geonu_Signal.Total.Total = Output.Lithosphere.Geonu_Signal.Total.U238 + Output.Lithosphere.Geonu_Signal.Total.Th232;
-        clear template layers layer;
+        Output.Lithosphere.Geonu_Signal.Total.Near_Field.Total = Output.Lithosphere.Geonu_Signal.Total.Near_Field.U238 + Output.Lithosphere.Geonu_Signal.Total.Near_Field.Th232;
+        clear template layers layer near_index;
     end
 elseif strcmp(layer_part, 'Mantle')
     fprintf('Mantle: Recording Signal Rate\n');

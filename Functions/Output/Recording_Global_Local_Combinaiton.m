@@ -22,16 +22,16 @@ iteration = 100000;
 % ---------- Final Data Structure ---------- %
 Results.Local_Crust.Density_Abundance_Table = lookup;
 Results.Local_Crust.Rock_Indices = zeros(length(unique_rock_type), 1);
-Results.Local_Crust.Correlation.Abundance = zeros(iteration, length(unique_rock_type));
-Results.Local_Crust.Correlation.Density = zeros(iteration, length(unique_rock_type));
+Results.Local_Crust.Correlation.Abundance = zeros(length(unique_rock_type), iteration);
+Results.Local_Crust.Correlation.Density = zeros(length(unique_rock_type), iteration);
 
-SIGNAL_U238 = zeros(iteration, length(unique_rock_type));
-SIGNAL_TH232 = zeros(iteration, length(unique_rock_type));
-MASS_ROCK = zeros(iteration, length(unique_rock_type));
-MASS_U = zeros(iteration, length(unique_rock_type));
-MASS_U238 = zeros(iteration, length(unique_rock_type));
-MASS_U235 = zeros(iteration, length(unique_rock_type));
-MASS_TH = zeros(iteration, length(unique_rock_type));
+SIGNAL_U238 = zeros(length(unique_rock_type), iteration);
+SIGNAL_TH232 = zeros(length(unique_rock_type), iteration);
+MASS_ROCK = zeros(length(unique_rock_type), iteration);
+MASS_U = zeros(length(unique_rock_type), iteration);
+MASS_U238 = zeros(length(unique_rock_type), iteration);
+MASS_U235 = zeros(length(unique_rock_type), iteration);
+MASS_TH = zeros(length(unique_rock_type), iteration);
 
 for index = 1 : length(unique_rock_type)
     type = unique_rock_type(index, 1);
@@ -65,20 +65,20 @@ for index = 1 : length(unique_rock_type)
     temp_u238 = temp_u238 + temp_density .* temp_au238 .* gp_u238;
     temp_th232 = temp_th232 + temp_density .* temp_ath232 .* gp_th232;
 
-    SIGNAL_U238(:, index) = temp_u238;
-    SIGNAL_TH232(:, index) = temp_th232;
+    SIGNAL_U238(index, :) = temp_u238;
+    SIGNAL_TH232(index, :) = temp_th232;
 
     % ----- Mass ----- %
-    MASS_ROCK(:, index) = temp_density .* volumes;
-    MASS_U(:, index) = temp_density .* volumes .* temp_au;
-    MASS_U238(:, index) = temp_density .* volumes .* temp_au238;
-    MASS_U235(:, index) = temp_density .* volumes .* temp_au235;
-    MASS_TH(:, index) = temp_density .* volumes .* temp_ath232;
+    MASS_ROCK(index, :) = temp_density .* volumes;
+    MASS_U(index, :) = temp_density .* volumes .* temp_au;
+    MASS_U238(index, :) = temp_density .* volumes .* temp_au238;
+    MASS_U235(index, :) = temp_density .* volumes .* temp_au235;
+    MASS_TH(index, :) = temp_density .* volumes .* temp_ath232;
 
     % ----- Recording ----- %
     Results.Local_Crust.Rock_Indices(index, 1) = type;
-    Results.Local_Crust.Correlation.Density(:, index) = correlation_density_table; % Iteration * Rock type %
-    Results.Local_Crust.Correlation.Abundance(:, index) = correlation_abundance_table; % Iteration * Rock type %
+    Results.Local_Crust.Correlation.Density(index, :) = correlation_density_table; % Iteration * Rock type %
+    Results.Local_Crust.Correlation.Abundance(index, :) = correlation_abundance_table; % Iteration * Rock type %
 end
 clear lookup rock_type unique_rock_type iteration;
 clear index type idx;
@@ -103,22 +103,22 @@ Results.Local_Crust.Heat_Power.U238 = Results.Local_Crust.Mass.U238 .* Physics.E
 Results.Local_Crust.Heat_Power.U235 = Results.Local_Crust.Mass.U235 .* Physics.Elements.Heat_Power.U235;
 Results.Local_Crust.Heat_Power.Th = Results.Local_Crust.Mass.Th .* Physics.Elements.Heat_Power.Th232;
 
-Results.Local_Crust.Heat_Power.MC.U = Results.Local_Crust.Heat_Power.U(:, 3);
-Results.Local_Crust.Heat_Power.MC.U238 = Results.Local_Crust.Heat_Power.U238(:, 3);
-Results.Local_Crust.Heat_Power.MC.U235 = Results.Local_Crust.Heat_Power.U235(:, 3);
-Results.Local_Crust.Heat_Power.MC.Th = Results.Local_Crust.Heat_Power.Th(:, 3);
+Results.Local_Crust.Heat_Power.MC.U = Results.Local_Crust.Heat_Power.U(3, :);
+Results.Local_Crust.Heat_Power.MC.U238 = Results.Local_Crust.Heat_Power.U238(3, :);
+Results.Local_Crust.Heat_Power.MC.U235 = Results.Local_Crust.Heat_Power.U235(3, :);
+Results.Local_Crust.Heat_Power.MC.Th = Results.Local_Crust.Heat_Power.Th(3, :);
 Results.Local_Crust.Heat_Power.MC.Total = Results.Local_Crust.Heat_Power.MC.U + Results.Local_Crust.Heat_Power.MC.Th;
 
-Results.Local_Crust.Heat_Power.UC.U = sum(Results.Local_Crust.Heat_Power.U(:, 1:8), 2) - Results.Local_Crust.Heat_Power.U(:, 3);
-Results.Local_Crust.Heat_Power.UC.U238 = sum(Results.Local_Crust.Heat_Power.U238(:, 1:8), 2) - Results.Local_Crust.Heat_Power.U238(:, 3);
-Results.Local_Crust.Heat_Power.UC.U235 = sum(Results.Local_Crust.Heat_Power.U235(:, 1:8), 2) - Results.Local_Crust.Heat_Power.U235(:, 3);
-Results.Local_Crust.Heat_Power.UC.Th = sum(Results.Local_Crust.Heat_Power.Th(:, 1:8), 2) - Results.Local_Crust.Heat_Power.Th(:, 3);
+Results.Local_Crust.Heat_Power.UC.U = sum(Results.Local_Crust.Heat_Power.U(1:8, :), 1) - Results.Local_Crust.Heat_Power.U(3, :);
+Results.Local_Crust.Heat_Power.UC.U238 = sum(Results.Local_Crust.Heat_Power.U238(1:8, :), 1) - Results.Local_Crust.Heat_Power.U238(3, :);
+Results.Local_Crust.Heat_Power.UC.U235 = sum(Results.Local_Crust.Heat_Power.U235(1:8, :), 1) - Results.Local_Crust.Heat_Power.U235(3, :);
+Results.Local_Crust.Heat_Power.UC.Th = sum(Results.Local_Crust.Heat_Power.Th(1:8, :), 1) - Results.Local_Crust.Heat_Power.Th(3, :);
 Results.Local_Crust.Heat_Power.UC.Total = Results.Local_Crust.Heat_Power.UC.U + Results.Local_Crust.Heat_Power.UC.Th;
 
-Results.Local_Crust.Heat_Power.LC.U = sum(Results.Local_Crust.Heat_Power.U(:, end - 1 : end), 2);
-Results.Local_Crust.Heat_Power.LC.U238 = sum(Results.Local_Crust.Heat_Power.U238(:, end - 1 : end), 2);
-Results.Local_Crust.Heat_Power.LC.U235 = sum(Results.Local_Crust.Heat_Power.U235(:, end - 1 : end), 2);
-Results.Local_Crust.Heat_Power.LC.Th = sum(Results.Local_Crust.Heat_Power.Th(:, end - 1 : end), 2);
+Results.Local_Crust.Heat_Power.LC.U = sum(Results.Local_Crust.Heat_Power.U(end - 1 : end, :), 1);
+Results.Local_Crust.Heat_Power.LC.U238 = sum(Results.Local_Crust.Heat_Power.U238(end - 1 : end, :), 1);
+Results.Local_Crust.Heat_Power.LC.U235 = sum(Results.Local_Crust.Heat_Power.U235(end - 1 : end, :), 1);
+Results.Local_Crust.Heat_Power.LC.Th = sum(Results.Local_Crust.Heat_Power.Th(end - 1 : end, :), 1);
 Results.Local_Crust.Heat_Power.LC.Total = Results.Local_Crust.Heat_Power.LC.U + Results.Local_Crust.Heat_Power.LC.Th;
 
 Results.Local_Crust.Heat_Power.Total.U = Results.Local_Crust.Heat_Power.UC.U + Results.Local_Crust.Heat_Power.MC.U + Results.Local_Crust.Heat_Power.LC.U;
@@ -133,16 +133,16 @@ Results.Local_Crust.Geonu_Signal.U238 = SIGNAL_U238;
 Results.Local_Crust.Geonu_Signal.Th232 = SIGNAL_TH232;
 clear SIGNAL_U238 SIGNAL_TH232;
 
-Results.Local_Crust.Geonu_Signal.MC.U238 = Results.Local_Crust.Geonu_Signal.U238(:, 3);
-Results.Local_Crust.Geonu_Signal.MC.Th232 = Results.Local_Crust.Geonu_Signal.Th232(:, 3);
+Results.Local_Crust.Geonu_Signal.MC.U238 = Results.Local_Crust.Geonu_Signal.U238(3, :);
+Results.Local_Crust.Geonu_Signal.MC.Th232 = Results.Local_Crust.Geonu_Signal.Th232(3, :);
 Results.Local_Crust.Geonu_Signal.MC.Total = Results.Local_Crust.Geonu_Signal.MC.U238 + Results.Local_Crust.Geonu_Signal.MC.Th232;
 
-Results.Local_Crust.Geonu_Signal.UC.U238 = sum(Results.Local_Crust.Geonu_Signal.U238(:, 1:8), 2) - Results.Local_Crust.Geonu_Signal.U238(:, 3);
-Results.Local_Crust.Geonu_Signal.UC.Th232 = sum(Results.Local_Crust.Geonu_Signal.Th232(:, 1:8), 2) - Results.Local_Crust.Geonu_Signal.Th232(:, 3);
+Results.Local_Crust.Geonu_Signal.UC.U238 = sum(Results.Local_Crust.Geonu_Signal.U238(1:8, :), 1) - Results.Local_Crust.Geonu_Signal.U238(3, :);
+Results.Local_Crust.Geonu_Signal.UC.Th232 = sum(Results.Local_Crust.Geonu_Signal.Th232(1:8, :), 1) - Results.Local_Crust.Geonu_Signal.Th232(3, :);
 Results.Local_Crust.Geonu_Signal.UC.Total = Results.Local_Crust.Geonu_Signal.UC.U238 + Results.Local_Crust.Geonu_Signal.UC.Th232;
 
-Results.Local_Crust.Geonu_Signal.LC.U238 = sum(Results.Local_Crust.Geonu_Signal.U238(:, end - 1 : end), 2);
-Results.Local_Crust.Geonu_Signal.LC.Th232 = sum(Results.Local_Crust.Geonu_Signal.Th232(:, end - 1 : end), 2);
+Results.Local_Crust.Geonu_Signal.LC.U238 = sum(Results.Local_Crust.Geonu_Signal.U238(end - 1 : end, :), 1);
+Results.Local_Crust.Geonu_Signal.LC.Th232 = sum(Results.Local_Crust.Geonu_Signal.Th232(end - 1 : end, :), 1);
 Results.Local_Crust.Geonu_Signal.LC.Total = Results.Local_Crust.Geonu_Signal.LC.U238 + Results.Local_Crust.Geonu_Signal.LC.Th232;
 
 Results.Local_Crust.Geonu_Signal.Total.U238 = Results.Local_Crust.Geonu_Signal.UC.U238 + Results.Local_Crust.Geonu_Signal.MC.U238 + Results.Local_Crust.Geonu_Signal.LC.U238;
@@ -166,7 +166,7 @@ for iLayer = 1 : len_layers
     mass_fields = {'Rock', 'U', 'U238', 'U235', 'Th'};
     for iField = 1 : length(mass_fields)
         filed = mass_fields{iField};
-        Results.(target).Mass.(layer).(filed) = Output.Lithosphere.Mass.(layer).(filed) - Combination.Mass.(filed)(:, iLayer);
+        Results.(target).Mass.(layer).(filed) = Output.Lithosphere.Mass.(layer).(filed) - Combination.Mass.(filed)(iLayer, :)';
     end
     clear iField mass_fields filed;
 
@@ -175,9 +175,9 @@ for iLayer = 1 : len_layers
     for iField = 1 : length(signal_fileds)
         field = signal_fileds{iField};
         if strcmp('Total', field)
-            Results.(target).Geonu_Signal.(layer).(field) = Output.Lithosphere.Geonu_Signal.(layer).(field) - Combination.Geonu_Signal.Total_Each_Layer(:, iLayer);
+            Results.(target).Geonu_Signal.(layer).(field) = Output.Lithosphere.Geonu_Signal.(layer).(field) - Combination.Geonu_Signal.Total_Each_Layer(iLayer, :)';
         else
-            Results.(target).Geonu_Signal.(layer).(field) = Output.Lithosphere.Geonu_Signal.(layer).(field) - Combination.Geonu_Signal.(field)(:, iLayer);
+            Results.(target).Geonu_Signal.(layer).(field) = Output.Lithosphere.Geonu_Signal.(layer).(field) - Combination.Geonu_Signal.(field)(iLayer, :)';
         end
     end
     clear signal_fileds iField field;
@@ -187,9 +187,9 @@ for iLayer = 1 : len_layers
     for iField = 1 : length(heat_fields)
         field = heat_fields{iField};
         if strcmp('Total', field)
-            Results.(target).Heat_Power.(layer).(field) = Output.Lithosphere.Heat_Power.(layer).(field) - Combination.Heat_Power.Total_Each_Layer(:, iLayer);
+            Results.(target).Heat_Power.(layer).(field) = Output.Lithosphere.Heat_Power.(layer).(field) - Combination.Heat_Power.Total_Each_Layer(iLayer, :)';
         else
-            Results.(target).Heat_Power.(layer).(field) = Output.Lithosphere.Heat_Power.(layer).(field) - Combination.Heat_Power.(field)(:, iLayer);
+            Results.(target).Heat_Power.(layer).(field) = Output.Lithosphere.Heat_Power.(layer).(field) - Combination.Heat_Power.(field)(iLayer, :)';
         end
     end
     clear heat_fields field iField target;

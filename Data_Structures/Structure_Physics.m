@@ -58,10 +58,12 @@ Physics.Oscillation.Coefficients.p3 = 'Load_Oscillation_Parameters()';
 % ~~~~~~~~~~~~~~~~~~~~ Elements ~~~~~~~~~~~~~~~~~~~~ %
 % % Elements.Halflife % %
 % % % From 10.1088/1674-1137/abddae % % %
-Physics.Elements.Halflife.U238 = 4.463e9 * 365 * 86400; % Unit: s %
-Physics.Elements.Halflife.U235 = 0.704e9 * 365 * 86400; % Unit: s %
-Physics.Elements.Halflife.Th232 = 14.0e9 * 365 * 86400; % Unit: s %
-Physics.Elements.Halflife.K40 = 1.248e9 * 365 * 86400; % Unit: s %
+one_year = 365.2425 * 86400;
+Physics.Elements.Halflife.U238 = 4.463e9 * one_year; % Unit: s %
+Physics.Elements.Halflife.U235 = 0.704e9 * one_year; % Unit: s %
+Physics.Elements.Halflife.Th232 = 14.07e9 * one_year; % Unit: s %
+Physics.Elements.Halflife.K40 = 1.248e9 * one_year; % Unit: s %
+clear one_year;
 
 % % Elements.Decay_Constant % %
 Physics.Elements.Decay_Constant.U238 = log(2) / Physics.Elements.Halflife.U238; % Unit: 1/s %
@@ -74,15 +76,17 @@ Physics.Elements.Decay_Constant.K40 = log(2) / Physics.Elements.Halflife.K40; % 
 Physics.Elements.Mass.U238 = 238.0507869; % Unit: amu %
 Physics.Elements.Mass.U235 = 235.0439281; % Unit: amu %
 Physics.Elements.Mass.Th232 = 232.0380536; % Unit: amu %
+Physics.Elements.Mass.Th230 = 230.0331323;
 Physics.Elements.Mass.K39 = 38.963706485; % Unit: amu %
 Physics.Elements.Mass.K40 = 39.96399817; % Unit: amu %
 Physics.Elements.Mass.K41 = 40.961825256; % Unit: amu %
 
 % % Elements.Abundance % %
 % % % Abundance.Mole % % %
-Physics.Elements.Abundance.Mole.U238 = 0.993;
+Physics.Elements.Abundance.Mole.U238 = 0.99274;
 Physics.Elements.Abundance.Mole.U235 = 1 - Physics.Elements.Abundance.Mole.U238;
-Physics.Elements.Abundance.Mole.Th232 = 1;
+Physics.Elements.Abundance.Mole.Th232 = 0.9998;
+Physics.Elements.Abundance.Mole.Th230 = 0.0002;
 Physics.Elements.Abundance.Mole.K39 = 0.01 * 93.258144;
 Physics.Elements.Abundance.Mole.K40 = 0.01 * 0.0117;
 Physics.Elements.Abundance.Mole.K41 = 0.01 * 6.730156;

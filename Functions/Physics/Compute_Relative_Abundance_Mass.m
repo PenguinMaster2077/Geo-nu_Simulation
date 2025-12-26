@@ -37,7 +37,12 @@ elseif strcmp(Name_Element, 'U235')
 
     output = (abun_U235 * mass_U235) / (abun_U235 * mass_U235 + abun_U238 * mass_U238);
 elseif strcmp(Name_Element, 'Th232')
-    output = 1;
+    mass_th232 = Mass.Th232;
+    mass_th230 = Mass.Th230;
+    abun_Th232 = Abundance.Th232;
+    abun_th230 = Abundance.Th230;
+
+    output = (abun_Th232 * mass_th232) / (abun_Th232 * mass_th232 + abun_th230 * mass_th230);
 elseif strcmp(Name_Element, 'K40')
     mass_K39 = Mass.K39;
     mass_K40 = Mass.K40;

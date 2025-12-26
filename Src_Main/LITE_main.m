@@ -210,9 +210,10 @@ name_detector = Physics.Detector.Name;
 name_lith = Geology.Lithosphere.Model.Name;
 name_deep = Geology.Lithosphere.Model.Method.Deep_Crust;
 name_spectrum = Physics.Elements.Spectrum.Method;
+name_ibd = Physics.Cross_Section.Model;
 iteration_str = num2str(iteration);
-filename_base = sprintf('%s_%s_%s_%s_%s_%s.mat', ...
-    name_detector, iteration_str, name_lith, name_deep, name_spectrum, timestamp);
+filename_base = sprintf('%s_%s_%s_%s_%s_%s_%s.mat', ...
+    name_detector, iteration_str, name_lith, name_deep, name_ibd, name_spectrum, timestamp);
 filename = fullfile(baseDir, 'Output', 'LITE', filename_base);    % Generate filename
 save(filename, 'Geology', 'Physics', 'Output');
 clear name_detector name_lith name_detector iteration_str name_spectrum;

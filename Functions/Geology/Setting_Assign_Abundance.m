@@ -51,4 +51,4 @@ Geology = Assign_Abundance_Layer(Geology, 'LM_CC', LM_CC_Abundance_U, LM_CC_Abun
 Geology = Assign_Abundance_Layer(Geology, 'Sed', Sed_Abundance_U, Sed_Abundance_Th, Sed_Abundance_K);
 clear OC_Abundance_U OC_Abundance_Th OC_Abundance_K UC_CC_Abundance_U UC_CC_Abundance_Th UC_CC_Abundance_K;
 clear LM_CC_Abundance_U LM_CC_Abundance_Th LM_CC_Abundance_K Sed_Abundance_U Sed_Abundance_Th Sed_Abundance_K;
-% [Geology,Physics] = Find_Near_Field_Cells(Geology, Physics);
+[Geology] = Find_Near_Field_Cells(Geology, Physics);

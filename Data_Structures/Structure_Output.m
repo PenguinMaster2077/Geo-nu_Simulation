@@ -26,12 +26,14 @@ for ii1 = 1 : length(Interests_fields)
             for ii3 = 1 : length(Items_fields)
                 item = Items_fields{ii3};
                 Output.Lithosphere.(interest).(layer).(item) = 'Recording_Signal_Rate.m';
+                Output.Lithosphere.(interest).(layer).Near_Field.(item) = 'Recording_Signal_Rate.m';
             end % ii3 for item
     end % ii2 for layers
 end % ii1 for Interests
 
 % % Mass % %
 Interests_fields = {'Mass'};
+Layers = {'s1', 's2', 's3', 'UC', 'MC', 'LC', 'LM', 'Total'};
 Items_fields = {'Rock', 'U', 'U238', 'U235', 'Th', 'K'};
 for ii1 = 1 : length(Interests_fields)
     interest = Interests_fields{ii1};
@@ -40,6 +42,7 @@ for ii1 = 1 : length(Interests_fields)
         for ii3 = 1 : length(Items_fields)
             item = Items_fields{ii3};
             Output.Lithosphere.(interest).(layer).(item) = 'Recording_Mass.m';
+            Output.Lithosphere.(interest).(layer).Near_Field.(item) = 'Recording_Mass.m';
         end
     end
 end
@@ -68,6 +71,7 @@ for ii1 = 1 : length(Interests_fields)
         for ii3 = 1 : length(Items_fields)
             item = Items_fields{ii3};
             Output.Lithosphere.(interest).(layer).(item) = 'Record';
+            Output.Lithosphere.(interest).(layer).Near_Field.(item) = 'Record';
         end
     end
 end

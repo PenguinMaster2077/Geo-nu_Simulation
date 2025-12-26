@@ -129,3 +129,8 @@ Geology.BSE.Correlation = 'Generate_Correlations()';
 % ~~~~~~~~~~~~~~~~~~~~ Other ~~~~~~~~~~~~~~~~~~~~ %
 Geology.Other.Earth.Mass = 'Compute_Mantle_Variables.m';
 Geology.Other.Core.Mass = 'Compute_Mantle_Variables.m';
+
+% ~~~~~~~~~~~~~~~~~~~~ Near-Field ~~~~~~~~~~~~~~~~~~~~ %
+Geology.Near_Field.Method = 'Traditional'; % 4 * 6 cells %
+Geology.Near_Field.Indices = 'Find_Near_Field_Cells.m';
+Geology.Near_Field.Indices = 'Find_Near_Field_Cells.m';

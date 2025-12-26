@@ -10,7 +10,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 fprintf('Complete: Lithosphere\n');
 
-clear GeoPhys;
+clear GeoPhys layer_part;
 clear Sig_Res_U238 Sig_Res_Th232 energy;
 clear p1 p2 p3 m21 m31 m32;
 

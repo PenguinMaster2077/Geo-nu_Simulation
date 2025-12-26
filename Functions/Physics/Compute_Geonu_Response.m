@@ -26,7 +26,7 @@ function Physics = Compute_Geonu_Response(Physics)
 % % ~~~~~~~~~~~~~~~~~~~~ Get Variables ~~~~~~~~~~~~~~~~~~~~ % %
 am_kg = Physics.Constants.Unit_Conversion.amu_kg;
 IBD = Physics.Cross_Section.IBD;
-one_year = 365 * 86400;
+one_year = 365.2425 * 86400;
 HPEs = {'U235', 'U238', 'Th232', 'K40'};
 % % ~~~~~~~~~~~~~~~~~~~~ Computation ~~~~~~~~~~~~~~~~~~~~ % %
 for i = 1 : length(HPEs)

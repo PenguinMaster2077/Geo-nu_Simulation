@@ -33,15 +33,15 @@ lat_center - lat_interval/2, lat_center + lat_interval/2, ...
 radius - half_thick, radius + half_thick); % Unit: m^3 %
 
 % -------------------- Compute for GP Factor -------------------- %
-if distance <= 1e4
-    Pee = 0.55;
-else
+% if distance <= 1e4
+%     Pee = 0.55;
+% else
 part1 = 1 + p1 .* sin(1.27 * m21 .* bsxfun(@rdivide, distance, energy')) .^2; % cell * Energy %
 part2 = p2 .* sin(1.27 * m31 .* bsxfun(@rdivide, distance, energy')) .^2; % cell * Energy %
 part3 = p3 .* sin(1.27 * m32 .* bsxfun(@rdivide, distance, energy')) .^2; % cell * Energy %
 
 Pee = part1 + part2 + part3; % 1 * Energy %
-end
+% end
 % Pee = 0.55; % 1 * Energy %
 
 sig_factor_u238 = sum(VOLUME .* (Pee .* sig_response_u238'), 2); % 1 * 1 %
